@@ -1,0 +1,9 @@
+A C variable cannot start with
+(1) A special symbol other than underscore
+(2) A number
+(3) An alphabet
+(4) Both (1) & (2) above
+
+
+Answer
+(4) Both (1) & (2) above
