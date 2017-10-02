@@ -1,0 +1,266 @@
+#include<stdio.h>
+#include<string.h>
+struct student
+{
+	char name[20];
+	int year;
+	char department[20];
+	float cgpa;
+}stud[10];
+      typedef struct student NAME;
+      NAME num;
+
+  void DetailByYear(int number)
+  {
+    int temp,i=0;
+	printf("\nEnter the year");
+	scanf("%d",&temp);
+	printf("\nthe year is %d",temp);
+
+	for(i=0;i<number;i++)
+
+	{
+
+	//checks for the year
+
+	if(stud[i].year==temp)
+	{
+	printf("\n%s",stud[i].name);
+
+	}
+	}
+	}
+  void DetailsByDept(int number)
+  {
+	char dept[10];
+	int i=0;
+	printf("\nEnter the department");
+	scanf("%s",&dept);
+	printf("\nthe department is %s",dept);
+	for(i=0;i<number;i++)
+
+	{
+
+	//compares two string
+
+	if(strcmp(dept,stud[i].department)==0)
+	{
+
+	printf("\n%s",stud[i].name);
+	}
+
+	}
+  }
+
+void DetailsByCgpa(int number)
+{
+
+	int temp,i=0;
+	int j=0;
+	for(i=0;i<number-1;i++)
+
+	{for(j=i+1;j<number;j++)
+	{
+
+	//checks for highest cgpa
+
+	   if(stud[i].cgpa>stud[j].cgpa)
+	   {
+
+	   temp=stud[i].cgpa;
+	   stud[i].cgpa=stud[j].cgpa;
+	   stud[j].cgpa=temp;
+	   }
+
+	}
+	}
+	 printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+
+}
+     void DetailsByDep(int number)
+   {
+
+	float temp;
+	int i=0;
+	int j=0;
+	char dept[10];
+	printf("\nEnter the department");
+	scanf("%s",&dept);
+
+	for(i=0;i<number;i++)
+
+	{
+	if(strcmp(dept,stud[i].department)==0)
+	{
+
+	//checks the cgpa
+
+	if(temp<stud[i].cgpa)
+	{
+	 temp=stud[i].cgpa;
+	 j=i;
+	}
+	}
+	}
+
+	printf("\n%s\t%d\t%s\t%.2f",stud[j].name,stud[j].year,stud[j].department,stud[j].cgpa);
+	}
+      void DetailsNames(int number)
+      {
+      char dept[10];
+    int i=0;
+    char num;
+	printf("\nEnter the name");
+	scanf("%s",&dept);
+
+	//display the names
+
+	for(i=0;i<number;i++)
+
+	{
+	if(strcmp(dept,stud[i].name)==0)
+	{
+
+	printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+	}
+	}
+	}
+     void Display(int number)
+     {
+
+     int i=0;
+
+	// display the record
+
+	for(i=0;i<number;i++)
+	{
+	printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+	}
+	}
+	void Update(int number)
+	{
+	int i=0;
+	char dept[10];
+	printf("\n Enter the name");
+	scanf("%s",&dept);
+	for(i=0;i<number;i++)
+	{
+       if(strcmp(dept,stud[i].name)==0)
+       {
+
+	//updates the cgpa by .5
+
+	stud[i].cgpa=stud[i].cgpa+0.5;
+	printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+	}}
+	}
+	int main()
+	{
+	int i=0;
+	int number=0;
+	int j=0;
+	float temp;
+	int choice=0;
+	NAME num;
+	clrscr();
+	printf("Enter number of records");
+	scanf("%d",&number);
+	printf("\nEnter the details");
+
+	//gets the input
+
+	for(i=0;i<number;i++)
+	{
+	printf("\nEnter the name");
+	scanf("%s",&stud[i].name);
+	printf("\nEnter the year");
+	scanf("%d",&stud[i].year);
+	printf("\nEnter the department");
+	scanf("%s",&stud[i].department);
+	printf("\nEnter the cgpa");
+	scanf("%d",&stud[i].cgpa);
+	temp=stud[i].cgpa;
+	if(temp>0)
+	{
+	printf("\t");
+	}
+	else
+	{
+	printf("not valid input");
+	}
+	}
+	printf("\nName\tyear\tdeparment\tcgpa");
+	for(i=0;i<number;i++)
+	{
+	printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+	}
+
+	//sorting the names
+
+       for(i=0;i<number-1;i++)
+       {
+	 for(j=i+1;j<number;j++)
+	 {
+	   if(strcmp(stud[i].name,stud[j].name)>0)
+	   {
+	   num=stud[i];
+	   stud[i]=stud[j];
+	   stud[j]=num;
+	   }
+	 }
+	}
+	printf("\n after sorting");
+	for(i=0;i<number;i++)
+	{
+	printf("\n%s\t%d\t%s\t%.2f",stud[i].name,stud[i].year,stud[i].department,stud[i].cgpa);
+	}
+	printf("\n 1 - Display names by particular year");
+	printf("\n 2 - Display names by particular department");
+	printf("\n 3 - Display by highest cgpa");
+	printf("\n 4 - Display by particular department and cgpa");
+	printf("\n 5 - Display names");
+	printf("\n 6 - Display details");
+	printf("\n 7 - update cgpa");
+	printf("\n 8 - Exit");
+	while(1)
+	{
+
+	printf("\nEnter the choice");
+	scanf("%d",&choice);
+
+	//get the choice
+
+	switch(choice)
+	{
+	case 1:
+		printf("\nEnter the number");
+		scanf("%d",&number);
+		DetailByYear(number);
+		break;
+	case 2:
+		DetailsByDept(number);
+		break;
+	case 3:
+		DetailsByCgpa(number);
+		break;
+	case 4:
+		DetailsByDep(number);
+		break;
+	case 5:
+		DetailsNames(number);
+		break;
+	case 6:
+	printf("\nEnter the number");
+	scanf("%d",&number);
+		Display(number);
+		break;
+	case 7:
+		Update(number);
+		break;
+	case 8:
+		exit(0);
+	default:
+	printf("\n Wrong choice");
+	}
+	}
+	}
