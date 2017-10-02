@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+int number,value,sum_of_digit=0;
+clrscr();
+printf("Enter the number");
+scanf("%d",&number);
+while(number>0)
+{
+value=number%10;
+
+//add value with sumofdigits
+
+sum_of_digit=value+sum_of_digit;
+number=number/10;
+}
+
+//print the sumof digit
+
+printf("\n The sum of given digit is %d",sum_of_digit);
+getch();
+}
