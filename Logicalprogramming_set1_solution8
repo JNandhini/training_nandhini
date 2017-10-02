@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int userid[5]={6,5,7,9,8};
+	int password[5]={769,766,890,657,899};
+	int user,i=0;
+	int number=4,pwd,j;
+	clrscr(); 
+	printf("Enter the userid");
+
+	//get user id
+
+	scanf("%d",&user);
+	printf("\n The userid is %d",user);
+
+	//checks the condition
+
+	while((i<number)&&(user!=userid[i]))
+	{
+	i++;
+	}
+		if(user==userid[i])
+		{
+		printf("\n Enter the password");
+		scanf("%d",&pwd);
+		if(pwd!=password[i])
+		{
+		j=0;
+		while(j<2)
+		{
+		printf("\n Enter the password");
+		scanf("%d",&password[j]);
+		if(password[i]!=password[j])
+		{
+
+		//increments j
+		
+		j++;
+		}
+		}
+		printf("\n All the 3 attempts are failed");
+		}
+	       else
+	       {
+	       printf("\n Welcome %d",userid[i]);
+	       }
+	       }
+	       else
+	       {
+	       printf("\n Not a valid user");
+	       }
+	       getch();
+	       }
+         
