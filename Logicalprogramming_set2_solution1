@@ -1,0 +1,14 @@
+#include<stdio.h>
+void main()
+{
+int a,b;
+clrscr();
+a= -4 - -4;
+b=-4 - - (-4);
+printf("\n the a=%d\n b=%d",a,b);
+getch();
+}
+
+Answer
+a=0  
+b=-8
