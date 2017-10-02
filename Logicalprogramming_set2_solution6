@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void read()
+{
+ FILE *fptr1;
+ char ch;
+ char FileName[20];
+ printf("\nEnter the filename");
+ scanf("%s",FileName);
+
+   //read the file
+
+ fptr1=fopen(FileName,"r");
+ if(fptr1==NULL)
+ {
+ printf("Cannot open file");
+ exit(0);
+ }
+printf("\nReading %s file",FileName);
+ch=fgetc(fptr1);
+while(ch!=EOF)
+{
+printf("%c",ch);
+ch=fgetc(fptr1);
+}
+fclose(fptr1);
+}
+void addData(){
+     FILE *fptr2;
+    
+     fptr = fopen("Employee.txt","a+t");
+     clrscr();
+     printf("\n*****ADDING DATA*****\n");
+    
+     printf("Enter Name : ");
+     fflush(stdin);
+     scanf("%s",&name);
+     printf("Enter PhNumber : ");
+     scanf("%d",&PhNumber);
+     fflush(stdin);
+     printf("Enter Designation : ");
+     scanf("%s",&Designation");
+     fscanf(stdin,"%s %d %s",&name,&PhNumber,&designation);
+     fprintf(fp,"%s %d %s ",name,PhNumber,designation);
+     fclose(fptr2);
+}
+int main()
+{
+FILE *fptr;
+int i=0;
+char name[100];
+int PhNumber;
+char designation[100];
+int number=0;
+clrscr();
+
+   //create a file
+
+fptr=fopen("Employee.txt","a+");
+printf("\nEnter the number");
+scanf("%d",&number);
+
+   //get the input
+
+for(i=0;i<number;i++)
+{
+printf("\nEnter the name");
+scanf("%s",name);
+fprintf(fptr,"\nName =%s",name);
+printf("\nEnter the PhNumber");
+scanf("%d",&PhNumber);
+fprintf(fptr,"\nPhNumber =%d",PhNumber);
+printf("\nEnter the designation");
+scanf("%s",designation);
+fprintf(fptr,"\nDesignation =%s",designation);
+}
+
+  //close the file
+
+fclose(fptr);
+read();
+adddata();
+return 0;
+}
+
