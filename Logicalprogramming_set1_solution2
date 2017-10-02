@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include<conio.h>
+void main()
+{
+            int  number=0;
+	    int value;
+             int temp=1;
+             clrscr();
+             printf ("Enter the value");
+             scanf("%d",& value);
+
+        // checks the value
+
+	while(temp<=value)
+	{
+
+             
+              number=number+1;
+		if((temp%2)!=0)
+ 		 {
+                       printf("%d",number);
+
+                    // increments the temp value
+
+			++temp;
+
+           
+	         }
+		if((temp%2)==0)
+		{
+             if(temp<=value)
+	           {
+
+ 		// number added by two
+ 
+	            number=number+2;
+
+                   printf("%d",number);
+    	            ++temp;
+              }
+    
+		}
+		
+
+}
+getch();
+}
