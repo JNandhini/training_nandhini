@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include<string.h>
+void main()
+{
+	char line[90];
+	int vowels=0;
+	int digits=0;
+	int consonants=0 ;
+	int white_spaces=0;
+	int character=0;
+	int i,length=0;
+	clrscr();
+	printf("Enter the string");
+	scanf("%100[^\n]",line);
+
+	//find the length
+
+	length=strlen(line);
+	for(i=0;i<length;i++)
+	{
+
+	  //checks for vowels
+
+	  if(line[i]=='a'||line[i]=='e'||line[i]=='i'||line[i]=='o'||line[i]=='u'||line[i]=='A'||line[i]=='E'||line[i]=='I'||line[i]=='O'||line[i]=='U')
+	  {
+	  vowels++;
+	  }
+	  else if((line[i]>='0')&&(line[i]<='9'))
+	  {
+	  digits++;
+	  }
+	  else if((line[i]>='a') && (line[i]<='z'))
+	  {
+	  consonants++;
+	  }
+
+	  //check for whitespaces
+
+	  else if(line[i]==' ')
+	  {
+	  white_spaces++;
+	  }
+	  else
+	  {
+	  character++;
+	  }
+     }
+
+	//display the values
+
+	printf("\n The length is %d ",length);
+	printf("\n The vowels are %d",vowels);
+	printf("\n The consonants are %d",consonants);
+	printf("\n The digits are %d",digits);
+	printf("\n The white spaces are %d",white_spaces);
+	printf("\n The special character %d",character);
+		 getch();
+
+}
