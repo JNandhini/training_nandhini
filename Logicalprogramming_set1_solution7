@@ -1,0 +1,52 @@
+ #include<stdio.h>
+#include<conio.h>
+void main()
+{
+int amount,value1=100;
+int value2=50;
+int value3=10;
+clrscr();
+printf("Enter the amount to be withdrawn");
+
+// getting input value
+
+scanf("%d",&amount);
+printf("\n%d",amount);
+	if((amount%10)!=0)
+	{
+	printf("\n Entered amount cannot be dispended");
+	}
+	else
+	{   
+	  
+  		if(amount>=value1)
+		 {
+
+		value1=amount/value1;
+
+		//calculate amount value by modulus
+
+		amount=amount%100;
+		printf("\n The value of 100: %d",value1);
+		  }
+
+		if(amount>=value2)
+		{
+
+		//calculating value2
+
+		value2=amount/value2;
+		amount=amount%50;
+		printf("\n the value of 50: %d",value2);
+ 		}
+
+		if(amount>=value3)
+  		{
+		value3=amount/value3;
+		amount=amount%10;
+		printf("\n the value of 10: %d",value3);
+   		}
+ }
+ getch();
+ }
+ 
