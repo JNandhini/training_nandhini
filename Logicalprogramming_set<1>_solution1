@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<conio.h> 
+void main()
+{
+	int principle;
+	int interest;
+	int no_of_yrs;
+	float sum;
+	clrscr();
+	printf("enter the values of principle,interest,no of years");
+	scanf("%d/n%d/n%d",&principle,& interest,&no_of_yrs);
+
+	//calculating sum
+	
+	sum=(principle*no_of_yrs*interest)/100;
+
+	//print value with two decimal values
+
+	printf("the sum is%.2f",sum);
+	getch();
+}
