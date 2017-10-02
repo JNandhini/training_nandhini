@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include<string.h>
+int MaximumElement(int elements[],int value);
+int num;
+int main()
+{
+
+	int elements[20];
+	int i,value,max;
+	 clrscr();
+
+	//get value
+
+	printf("Enter the value");
+	scanf("%d",&value);
+	printf("\n the value is %d",value);
+	printf("\nEnter the elements");
+
+	//checks the condition
+
+	for(i=0;i<value;i++)
+	{
+	  scanf("%d",&elements[i]);
+
+	printf("\n the elements are %d", elements[i]);
+	}
+max=MaximumElement(elements,value);
+printf("\n the value is %d",max);
+	getch();
+	return 0;
+	}
+	int MaximumElement(int elements[],int value)
+	{
+static int i=0,max=-9999;
+
+	if(i<value)
+      {
+
+
+	if(max<elements[i])
+	max=elements[i];
+
+	//increments the value by 1
+
+	i++;
+
+	//calling the function
+
+      MaximumElement(elements, value);
+      }
+
+      return max;
+ }
+ 
+ 
