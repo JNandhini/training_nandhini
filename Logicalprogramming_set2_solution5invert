@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<conio.h>
+void invert(int number,int position,int NoOfBits);
+void main()
+{
+int position=0;
+int number=0;
+int NoOfBits=0;
+clrscr();
+printf("Enter the number");
+scanf("%d",&number);
+printf("Enter the position\n");
+scanf("%d",&position);
+printf("Enter the no of bits to be changed");
+scanf("%d",&NoOfBits);
+
+//calling the function
+
+invert(number,position,NoOfBits);
+getch();
+}
+void invert(int number,int position,int NoOfBits)
+{
+	int shift=0,bits=1;
+	int i=0,j=0,invertion=0,count=0;
+
+	//print the number as binary value
+
+	for(i=31;i>=0;i--)
+	{
+
+	//right shift the number
+
+	j=number>>i;
+
+		if(j&1)
+		printf("1");
+		else
+		printf("0");
+	}
+
+	//values at positions are changed
+
+	for(count=position;count<=position+NoOfBits;count++)
+	{
+	shift=bits<<count;
+	invertion=shift^number;
+	number=invertion;
+	}
+	printf("\nThe value changed is %d",number);
+	printf("\nThe changed value is\n");
+	for(i=31;i>=0;i--)
+	{
+	j=invertion>>i;
+		if(j&1)
+		printf("1");
+		else
+		printf("0");
+	}
+}
