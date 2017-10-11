@@ -1,0 +1,27 @@
+20.	In Example the first loop works, but the second fails. Why?
+#include <iostream.h>
+main ()
+{
+short int i;
+// Works
+for (i = 0x80; i !=0; i = (i >> 1)) {
+cout << "i is " << hex << i << dec << '\n';
+}
+signed char ch;
+// Fails
+for (ch = 0x80; ch!=0; ch = (ch >> 1))
+cout << "ch is " << hex << int(ch) << dec << '\n';
+}
+return (0);
+}
+
+
+Answer:
+
+ch is char variable 
+It stores only 8 bit.
+0x80 is 1000 0000
+it is right shifted until the condition fails
+0x1 is 0000 0001
+when it is right shifted it is in negative value
+So make the signed char to unsigned char.
