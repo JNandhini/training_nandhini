@@ -1,0 +1,26 @@
+13.	The following program generates the answer 47 instead of the expected answer 144. Why?
+#include <iostream.h>
+#define FIRST_PART 7
+#define LAST_PART 5
+#define ALL_PARTS FIRST_PART + LAST_PART
+main()
+{
+cout << "The square of all the parts is " <<
+ALL_PARTS * ALL_PARTS << '\n';
+return (0);
+}
+
+Answer:
+
+The value taken by the function is like
+7+5*7+5 
+=7+35+5
+47
+
+* has first priority so it multiplies and then add the value.
+and if bracket is provided as 
+ALL_PARTS (FIRST_PART + LAST_PART)
+ then (7+5)
+ as 12
+ 12*12
+ 144
