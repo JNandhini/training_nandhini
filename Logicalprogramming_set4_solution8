@@ -1,0 +1,20 @@
+8.	Is it a legal code?
+size = 5;
+result = ++size;
+The first statement assigns size the value of 5. The second statement:
+1. Increments size (side effect)
+2. Assigns result the value of size (main operation)
+But in what order? 
+1. result is assigned the value of size (5), and then size is incremented.
+result is 5 and size is 6.
+2. size is incremented, and then result is assigned the value of size (6).
+result is 6 and size is 6.
+3. The answer is compiler dependent and varies from computer to computer.
+4. If you don't write code like this, you don't have to worry about these sorts of questions.
+
+Answer:
+
+It is a legal code
+
+2. size is incremented, and then result is assigned the value of size (6).
+result is 6 and size is 6.
