@@ -1,0 +1,21 @@
+14.	This program generates a warning that counter is used before it is set.
+This is a surprise because the for loop should set it. You also get a very strange warning, "null effect, "for line 11.
+1 // Warning, spacing is VERY important
+2
+3 #include <iostream.h>
+4
+5 #define MAX 10
+6
+7 main()
+8 {
+9 int counter;
+10
+11 for (counter = MAX; counter > 0;
+12 --counter)
+13 cout << "Hi there\n";
+14
+15 return (0);
+16 }
+
+Answer:
+It does not generate any warning and it prints the value Hi there for 10 times
