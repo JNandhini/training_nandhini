@@ -1,0 +1,11 @@
+5.	Is the following character variable signed or unsigned?
+
+char foo;
+Answers:
+a. It's signed.
+b. It's unsigned.
+c. It's compiler dependent.
+
+Answer:
+
+c. It's compiler dependent.
