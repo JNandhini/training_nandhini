@@ -1,0 +1,37 @@
+6.	Explain auto, register, static and extern variables.
+
+Auto
+Auto is the default storage classes. It's scope is inside the function and cannot accessed outside the function it declared.
+It is used as local variables.
+
+Syntax:
+datatype  identifier;
+or
+auto datatype identifier;
+
+Register:
+
+Register is a temporary memory which is used to store the value temporarily. It also like auto because it's scope is within the function.
+The values are stored in register and not in primary memory.This helps to increase the processing speed.
+
+Syntax:
+
+regiter datatype identifier;
+
+Static
+
+Static has the lifetime  for the whole program.The static variable holds the previous value and can be used.
+The variable is allocated when program is started and deallocated wwhen the program ends.
+
+Syntax:
+
+static datatype identifier;
+
+Extern:
+
+Extern is a global variable.If it is initialized then the value cannot be changed.
+it is visible to all the program.It can be used for many files.
+
+Syntax:
+
+extern datatype identifier;
