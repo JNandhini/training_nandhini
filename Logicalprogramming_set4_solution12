@@ -1,0 +1,33 @@
+12.	This program reads a list of five numbers and counts the number of threes and sevens in the data. Why does it give us the wrong answers?
+include <iostream.h>
+int seven_count; // Number of sevens in the data
+int data[5]; // The data to count 3 and 7 in
+int three_count; // Number of threes in the data
+int index; // Index into the data
+main() {
+seven_count = 0;
+three_count = 0;
+cout << "Enter 5 numbers\n";
+cin >> data[1] >> data[2] >> data[3] >>
+data[4] >> data[5];
+for (index = 1; index <= 5; ++index)
+if (data[index] == 3)
+++three_count;
+if (data[index] == 7)
+++seven_count;
+}
+cout << "Threes " << three_count << " Sevens " << seven_count << '\n';
+return (0);
+}
+When we run this program with the data 3 73 0 2, the results are:
+Threes 4 Sevens 1
+(Your results may vary.)
+
+Answer:
+The array index value should start with the value 0.The array is like a pointer which points to the memory location.
+The value 0 is the base address of the array.
+cin >> data[1] >> data[2] >> data[3] >>
+data[4] >> data[5];
+should be 
+cin >> data[0] >> data[1] >> data[2] >>
+data[3] >> data[4];
