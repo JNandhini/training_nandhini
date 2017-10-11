@@ -1,0 +1,8 @@
+1.	The following will work on a UNIX machine but will fail on a PC
+int zip; // zip code for current address
+........
+zip = 92126;
+Why does this fail? What will be the result when run on a PC?
+
+Answer:
+The range of integer is from -32768 to 32767 in normal compiler.So this fails to print the value of integer and prints the address of the value.
