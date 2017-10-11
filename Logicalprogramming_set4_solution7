@@ -1,0 +1,15 @@
+7.	Why does the following program fail to print the correct zip code? What does
+it print instead?
+long int zip; // Zip code
+main()
+{
+zip = 02137L; // Use the zip code for Cambridge MA
+cout << "New York's zip code is: " << zip << '\n';
+return(0);
+}
+
+
+Answer:
+
+02137 is an octal value .Normally a compiler prints the decimal value for every value.
+The octal value is converted to decimal value. The value printed is 1119 which is a decimal value.
