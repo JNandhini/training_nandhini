@@ -1,0 +1,31 @@
+19.	In the following program, the HIGH_SPEED flag works, but the DIRECT_CONNECT flag does not. Why?
+#include <iostream.h>
+const int HIGH_SPEED = (1<<7); /* modem is running fast */
+// we are using a hardwired connection
+const int DIRECT_CONNECT = (1<<8);
+char flags = 0; // start with nothing
+main()
+{
+flags |= HIGH_SPEED; // we are running fast
+flags |= DIRECT_CONNECT; // because we are wired together
+if ((flags & HIGH_SPEED) != 0)
+cout <<"High speed set\n";
+if ((flags & DIRECT_CONNECT) != 0)
+cout <<"Direct connect set\n";
+return (0);
+}
+
+
+Answer:
+
+In binary 
+the value of flag is 0000 0000
+The value of HIGH_SPEED is 1000 0000
+flag|= High_SPEED;
+=1000 0000 
+flag is of char stores 8 bit
+the value of DIRECT_CONNECT is 0001 0000 0000
+flag|= DIRECT_CONNECT;
+=0000 0000;
+it exceeds the range of char.
+so the DIRECT_CONNECT is not set
