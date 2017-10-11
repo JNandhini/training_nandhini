@@ -1,0 +1,23 @@
+3.	Example is designed to compute the area of a triangle, given its width
+and height. For some strange reason, the compiler refuses to believe that we declared the variable width. The declaration is right there on line two, just after the definition of
+height. Why isn't the compiler seeing it?
+
+#include <iostream.h>
+int height; /* the height of the triangle
+int width; /* the width of the triangle */
+int area; /* area of the triangle (computed) */
+main()
+{
+cout << "Enter width height? ";
+cin >> width >> height;
+area = (width * height) / 2;
+cout << "The area is " << area << '\n';
+return (0);
+}
+
+
+Answer
+int height; /* the height of the triangle 
+int width; /* the width of the triangle */
+In the line 6 the comment lines are not  closed .
+So it does not take the values of width.
