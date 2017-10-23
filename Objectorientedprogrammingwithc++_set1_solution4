@@ -1,0 +1,12 @@
+4.	As an exception propagates it:	
+A.	destructs any locally-declared objects created in any function through which it passes.			
+B.	destructs any dynamically-allocated objects created in any function through which it passes.			
+C.	destructs any locally-declared or dynamically-allocated objects created in any function through which it passes.
+D.	does not destruct any objects created in any function through which it passes.
+E.	only destructs objects declared in the try block which eventually catches it.
+
+
+Answer:
+
+
+E.only destructs objects declared in the try block which eventually catches it.
