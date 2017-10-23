@@ -1,0 +1,53 @@
+10.	Why does this example  fail when we delete the variable list_ptr? The
+program seems to get upset when it tries to call clear at line 20.
+
+ #include <iostream.h>
+ #include <stdlib.h>
+
+ class list {
+ private:
+ int item; // Current item number
+
+ public:
+ virtual void clear() = 0;
+
+ void next_item(void) {
+ ++item;
+ }
+
+ list(void) {
+ item = 0;
+ }
+
+ virtual ~list() {
+ clear();
+ }
+ };
+
+ class list_of_integers : public list {
+public:
+ int array[100]; // Place to store the items
+
+ void clear(void) {
+ int i; // Array index
+
+ for (i = 0; i < 100; ++i)
+ array[i] = 0;
+ }
+ };
+
+ main()
+ {
+ list_of_integers *list_ptr = new list_of_integers;
+
+ // Cause problems
+ delete list_ptr;
+ list_ptr = NULL;
+ return (0);
+ }
+
+Answer:
+
+In this the derived class object is deleted so the derived class destructor is not  called Then it calls the base class destructor
+  It is a virtual function so it calls the clear function for derived class but the derived class object is  deleted.
+  So the   program exits.
