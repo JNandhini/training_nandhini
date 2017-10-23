@@ -6,7 +6,7 @@ C.	Only derived class function will get called irrespective of object.
 D.	Base class object will call base class function and derived class object will call derived class function.
   
   
-  Answer
+  Answer:
   Base class object will call base class function and derived class object will call derived class function.
   
   
