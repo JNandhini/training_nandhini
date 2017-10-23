@@ -1,0 +1,41 @@
+2.	What is the output of the below code snippet. Provide necessary explanation to support your view.
+
+#include <iostream>
+class BaseClass
+{
+    int x;
+public:
+    int y;
+    void set(int a,int b)
+    {
+        x=a;
+        y=b;
+    }
+    void show()
+    {
+        std::cout<<"X ="<<x;
+    }
+};
+class DerivedClass : public BaseClass
+{
+    int i;
+};
+int main()
+{
+    int baseSize,derivedSize;
+    BaseClass bc;
+    DerivedClass dc;
+    derivedSize=sizeof(dc);
+    baseSize=sizeof(bc);
+    std::cout<<"Size of BaseClass "<<baseSize << "\n";
+    std::cout<<"Size of DerivedClass "<<derivedSize << "\n";
+    return 0;
+}
+
+Answer:
+
+Size of BaseClass 8 bytes
+Size of DerivedClass 12 bytes
+
+the size of class is 1 bytes but in this the datatype integer is defined . Integer takes four bytes of storage.
+So,the base class has 8 bytes of storage and the derived  class having the property of base class has 12 bytes of storage size.
