@@ -1,0 +1,22 @@
+6.	Brief the difference between Class and Struct. Also, provide some information on when to use them.
+
+class
+
+1.class access specifier is private by default.
+2.Class can be inheriteed.
+3.Class object are creacted in heap memory.
+4.CLass objects are deallocated automatically because garbage collector works on heap memory.
+5.Class size is 1 bytes
+6.Class are used for larger programs.
+
+Structure
+
+1.Struct  access specifier is public by default.
+2.Struct cannot be inherited.
+3.Struct object uses stack memory.
+4.Struct objects are not deallocated automatically.
+5.Struct is 0 bytes.
+6.Struct are used for small programs.
+
+If the data to be called from  outside the function then use structure.
+If the data is to be hidden and modified then the class is used.
