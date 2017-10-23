@@ -1,0 +1,31 @@
+7.	What is wrong in this program? If there is any problem with the below code, provide the corrected code.
+class Human
+{
+public:
+    Human() {}
+    ~ Human(){}
+};
+class Pilot: public Human
+{
+public:
+    Pilot():Human(){}
+    ~ Pilot(){}
+};
+int main(void)
+{
+  Human* george = new Pilot();
+  delete george;
+}
+
+
+The Desrtructors are called as derived class destructor  first and then the base class destructor.
+In this the object of the base class is assigned to the derived class and the object is deleted.
+So, the base class destructor is called and not derived class destrutor.
+To avoid this virtual keyword is used.
+class Human
+{
+public:
+    Human() {}
+   virtual ~ Human(){}
+};
+
