@@ -1,0 +1,11 @@
+3.	In C++, why is it possible to make a base-class pointer point to a derived-class object
+A.	Because a derived-class object has all the properties (data and functions) of a base-class object, so it can be treated just like one for all intents and purposes (including being pointed at)
+B.	Because the compiler can automatically convert any base-class object to any required derived class
+C.	Because pointers in C++ aren't type-checked
+D.	All of the above
+E.	None of the above
+
+
+Answer
+
+A.	Because a derived-class object has all the properties (data and functions) of a base-class object, so it can be treated just like one for all intents and purposes (including being pointed at)
