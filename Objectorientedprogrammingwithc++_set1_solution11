@@ -1,0 +1,23 @@
+11.	Why does this example work on UNIX, but when we run it in
+MSDOS/Windows we get the message:
+oot
+ew able: file not found
+
+#ifndef __MSDOS_
+#define NAME "/root/new/table"
+#else __MSDOS_
+#define NAME "\root\new\table"
+#endif __MSDOS_
+in_file.open(NAME);
+if (in_file.bad) {
+cout << NAME << ": file not found\n";
+exit (8);
+}
+
+Output:
+
+In MSDOS and windows the \r-root,\n- newline,\t-tab  and uses backslash .
+#else __MSDOS_
+#define NAME "\root\new\table" in this the \r  is taken and prints oot.
+  \n as new line and prints as ew then \t as  tab and prints the able
+  
