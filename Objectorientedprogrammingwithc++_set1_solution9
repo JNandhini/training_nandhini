@@ -1,0 +1,48 @@
+9.	Why does this example fail? When run it prints out:
+Copy constructor called
+Copy constructor called
+over and over.
+
+1 #include <iostream.h>
+2
+3 class trouble {
+4 public:
+5 int data;
+6
+7 trouble(void);
+8 trouble(const trouble &old);
+9 trouble operator = (trouble old_trouble);
+10 };
+11
+12 trouble::trouble(void) {
+13 data = 0;
+14 }
+15
+16 trouble::trouble(const trouble &old) {
+17 cout << "Copy constructor called\n";
+18 *this = old;
+19 }
+20
+21 trouble trouble::operator = (trouble old_trouble) {
+22 cout << "Operator = called\n";
+23 data = old_trouble.data;
+24 return (*this);
+25 }
+26
+27 int main()
+28 {
+29 trouble troublel;
+30 trouble trouble2(troublel);
+31
+32 return (0);
+33 }
+
+
+Output:
+
+Copy constructor should be a const value and should be a call by reference.
+In this the operator overloading the parameters are as call by value.
+trouble trouble::operator = (trouble old_trouble)
+So it produces the result until the memory is full.
+To avoid this use the reference operator
+trouble trouble::operator = (const trouble &old_trouble)
