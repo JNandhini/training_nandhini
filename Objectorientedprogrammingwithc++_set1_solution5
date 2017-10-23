@@ -1,0 +1,24 @@
+5.	What will be the output of the below code. Provide necessary information to support your decision.
+
+#include <iostream>
+class Printer {
+public:
+    Printer() {}
+    ~ Printer() {
+        throw 42;
+    }
+};
+
+int main(int argc, const char * argv[]) {
+    try {
+        Printer hp;
+        throw 32;
+    } catch(int a) {
+        std::cout << a;
+    }
+}
+
+Output:
+
+It produces an error
+Because destructor cannot throw an exception.
