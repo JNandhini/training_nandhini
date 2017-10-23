@@ -1,0 +1,12 @@
+1.	What happens if the base and derived class contains definition of a function with same prototype?
+
+A.	Compiler reports an error on compilation.
+B.	Only base class function will get called irrespective of object.
+C.	Only derived class function will get called irrespective of object.
+D.	Base class object will call base class function and derived class object will call derived class function.
+  
+  
+  Answer:
+  Base class object will call base class function and derived class object will call derived class function.
+  
+  
