@@ -1,0 +1,71 @@
+5.	Write a simple program which loops over a list of user data (tuples containing a username, email and age) and adds each user to a directory if the user is at least 16 years old. You do not need to store the age. Write a simple exception hierarchy which defines a different exception for each of these error conditions:
+•	the username is not unique
+•	the age is not a positive integer
+•	the user is under 16
+•	the email address is not valid (a simple check for a username, the @ symbol and a domain name is sufficient)
+Raise these exceptions in your program where appropriate. Whenever an exception occurs, your program should move onto the next set of data in the list. Print a different error message for each different kind of exception.
+You can consider an email address to be valid if it contains one @ symbol and has a non-empty username and domain name – you don’t need to check for valid characters. You can assume that the age is already an integer value.
+
+Program:
+
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	string UserName;
+	int NoOfRecords;
+	int age;
+	string email;
+	string user;
+  
+  //no of records for list of data
+  
+	cout<<"Enter NOofRecords\n";
+	cin>>NoOfRecords;
+	for(int count=0;count<NoOfRecords;count++)
+	{
+	    cout<<"Enter the username\n";
+	    cin>>UserName;
+	        
+	    cout<<"Enter the age\n";
+	    cin>>age;
+	    try
+     	{
+	      if(age<16||age<0)  
+        
+            // throw the exception
+        
+	      {
+	        
+	        throw age;
+	      }
+	    }
+      
+      //catch the exception
+      catch(int ag)
+	    {
+	    cout<<"Exception\n";
+	    }
+
+	    cout<<"Enter the email\n";
+	    cin>>email;
+      try
+      {
+	       if(email.length()==0)
+	       {
+	        throw email;
+	       }
+       }
+	    catch(string email)
+	    {
+	      cout<<"Badlengthexception\n";
+	    }
+	    
+	
+	}
+
+	
+}
+
