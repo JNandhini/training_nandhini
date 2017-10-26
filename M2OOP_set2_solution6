@@ -1,0 +1,116 @@
+6.	In this exercise you will write a program which estimates the cost of a telephone call, and also implement unit tests for the program.
+The phone company applies the following rules to a phone call to calculate the charge:
+•	The minimum before-tax charge of 59.400 cents applies to all calls to any destination up to 50km away and 89.000 cents for any destination further than 50km away.
+•	Calls are charged on a per-second basis at 0.759 cents per second (<= 50km) and 1.761 cents per second (> 50km)
+•	Off-peak seconds (from 19:00:00 to 06:59:59 the next day) are given a discount of 40% off (<= 50km) and 50% off (> 50km) off the above rate
+•	If the type of call was share-call AND the destination is more than 50km away, there is a discount of 50% off after any off-peak discount (minimum charge still applies). However, share-calls over shorter distances are not discounted.
+•	Finally, VAT of 14% is added to give the final cost.
+Your program should ask for the following input:
+•	The starting time of the call (to be split up into hours, minutes and seconds)
+•	The duration of the call (to be split up into minutes and seconds)
+•	Whether the duration was more than 50km away
+•	Whether the call was share-call
+Hint: you can prompt the user to input hours, minutes and seconds at once by asking for a format likeHH:MM:SS and splitting the resulting string by the delimiter. You may assume that the user will enter valid input, and that no call will exceed 59 minutes and 59 seconds.
+Your program should output the following information:
+•	The basic cost
+•	The off-peak discount
+•	The share-call discount
+•	The net cost
+•	The VAT
+•	The total cost
+i.	Before you write the program, identify the equivalence classes and boundaries that you will need to use in equivalence testing and boundary analysis when writing black-box tests. 
+ii.	Write the program. Remember that you will need to write unit tests for this program – the calculation that you need to test should be placed in some kind of unit, like a function, which can be imported from outside of the program and used independently of the rest of the code (like the user input)!
+iii.	Now implement the black-box tests by writing a unit test module for your program. Run all the tests, and make sure that they pass! 
+
+Program:
+
+#include <iostream>
+
+using namespace std;
+ int calculte();
+int main()
+{
+    calculte();
+} 
+int calculte()
+{
+int hour,min,sec=0;
+int minut,secs=0;
+int kilomtr,OffPeakDiscount=0;
+string call;
+int BasicCost=0;
+float MinCharge=59.40;
+float MaxCharge=89.00;
+int VAT=14;
+int FinalCost=0;
+	    
+	cout<<"Enter the time of call in format HH:MM:SS\n";
+	cin>>hour;
+	cin>>min;
+	cin>>sec;
+	cout<<"Enter the duration in HH:MM\n";
+	cin>>minut;
+	cin>>secs;
+	cout<<"Enter the distance\n";
+	cin>>kilomtr;
+	cout<<"Enter the type of call as share call or not as yes or no\n";
+  cin>>call;
+  
+    //calculates the basiccost
+  
+       if(kilomtr<=50)
+       {
+         BasicCost=(minut*60)+secs;
+         
+         //calculate the cost 
+         
+         BasicCost=(BasicCost*0.759)+MinCharge;
+         cout<<"BasicCost"<<BasicCost<<"cents\n";
+       }
+	   else
+	   {
+	       BasicCost=(minut*60)+secs;
+         BasicCost=(BasicCost*1.761)+MaxCharge;
+         cout<<"BasicCost "<<BasicCost<<"cents\n";
+	   }
+	   
+	    //calculates the poffpeakdiscount
+     
+	   if((hour>=19&&hour<=24)&&(hour>=1&&hour<=6))
+	   {
+	       if((min>=0&&min<=59)&&(sec>=0&&sec<=59)&&(kilomtr<=50))
+	       
+	       {
+	               
+	           OffPeakDiscount=(BasicCost*40)/100;
+	           cout<<"OffPeakDiscount"<<OffPeakDiscount<<"cents\n";
+	           FinalCost=((OffPeakDiscount*14)/100)+OffPeakDiscount;
+             cout<<"FinalCost is"<<FinalCost<<"cents";
+	       }
+	   }
+	  
+	   else
+	   {
+	   
+	       OffPeakDiscount=(BasicCost*50)/100;
+	       cout<<"OffPeakDiscount"<<OffPeakDiscount<<"cents\n";
+         FinalCost=((OffPeakDiscount*14)/100)+OffPeakDiscount;
+         cout<<"Final cost is "<<FinalCost<<"cents";
+	           
+	   }   
+	               
+    //checks for share call
+    
+     if((call=="yes")&&(kilomtr>=50))
+         
+     {
+            OffPeakDiscount=(OffPeakDiscount*50)/100;
+	          cout<<"OffPeakDiscount"<<OffPeakDiscount<<"cents\n";
+	          FinalCost=((OffPeakDiscount*14)/100)+OffPeakDiscount;
+            cout<<"final cost is"<<FinalCost<<"cents";
+	   }
+        
+	   
+}
+
+
