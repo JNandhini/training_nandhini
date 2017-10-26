@@ -1,0 +1,30 @@
+1.	Write down different classes for a computer soccer game. Implementation not required (Classes and Objects)
+
+  class soccer
+  {
+  public:
+     string ball;
+     string goalie;
+     //method
+  };
+  class players
+  {   
+    public:
+       string goal_keeper;
+       string main_players;
+       //method 
+  };  
+  class direction
+  {
+     public:
+       string left;
+       string right;
+       //method
+  };
+  int mai()
+  {
+  soccer game;
+  players field;
+  direction direct;
+  }
+  
