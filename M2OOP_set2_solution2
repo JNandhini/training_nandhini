@@ -1,0 +1,39 @@
+2.	Explain abstraction for the following example: Implementation not required. 
+You have an object Mobile Phone and have 3 mobile phones as following:-
+N 142 (Features:- Calling, SMS)
+N 271 (Features:- Calling, SMS, FM Radio, MP3, Camera)
+B (Features:-Calling, SMS, FM Radio, MP3, Camera, Video Recording, Reading E-mails)
+(Example could be in JAVA or C++)
+
+
+Answer:
+ 
+ Abstraction:
+ Abstraction is used to hide the functionality that goes beyond some action.It shows only the implementation part of the action.
+ For example phone has many option and if the user needs swipe the phone screen then only the swipe is shown to the user but the functionality behind that.
+ 
+class N142
+{
+//data member
+protected:
+void calling();
+void sms();
+};
+class N271:protected N142
+{
+//data member
+protected:
+void FM_Radio();
+void Mp3();
+void camera();
+};
+class B:protected N271
+{
+//data member
+protected:
+void video_recording();
+void reading_emails();
+}
+
+In this the concept of inheritance is used.The access specifier used is protected because it show the functionality to the derived class ad hides from outside class
+Three classes with some function like calling,sms are defined.The derived class  gets the functionality.
