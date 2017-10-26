@@ -1,0 +1,7 @@
+3.	Explain encapsulation with following:  Implementation not required
+Mobile Phone and Mobile Phone Manufacturer
+
+Encapsulation
+Encapsulation is used for binding the data with their member function.Encapsulation also hides the data.
+for example mobile phone amd mobile phone manufacturer.mobile phone manufacturer produces mobile on their design.If the user touches the screen
+then the screen opens in this the touch is data and mobile phone as object and when the object is created the data binds with   the function of the screen. 
