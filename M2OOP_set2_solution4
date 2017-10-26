@@ -8,8 +8,14 @@ subclass, such as a Ellipsoid, is impressively easy.
 
 Answer:
 a.hierarchy 
-   
-
+      
+       Class    geometric
+     / \   \   \     \    \
+    /   \   \   \     \    \
+   /     \   \   \     \    \
+  /       \   \   \     \    \
+class class class class class class 
+point line  plane cube  cuboid ellipsoid
 b. base class attribute and methods
  
  class geometric
