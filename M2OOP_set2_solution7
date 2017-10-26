@@ -1,0 +1,30 @@
+7.	A CustomVector class is defined as follows: 
+class CustomVector {
+ public: 
+// constructors and other public interface goes here 
+private: 
+// private data 
+std::vector< double> elements; 
+int length; 
+};
+
+(a) Design and code three constructors: 
+(i) a constructor: that takes a single integer that indicates the size of vector; 
+(ii) a constructor: that takes a length integer and an array of doubles to initialise the values; 
+(iii) a copy constructor. 
+(b) Give a example usage of each. 
+(c) Explain the problem that would arise if we used dynamic memory allocation (C++-style new or C-style malloc) instead of using std::vector<> 
+(d) What mechanism shall be used to overcome the problems arising in part (c)?
+(e) For CustomVector class, show how the square brackets operator (indexing operator) can be overloaded to return a given indexed element. Should this operator be a class member function, and if so will it be private or public
+
+
+class CustomVector {
+ public: 
+CustomVector
+{
+}
+private: 
+// private data 
+std::vector< double> elements; 
+int length; 
+};
