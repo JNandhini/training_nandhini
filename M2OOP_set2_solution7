@@ -18,14 +18,24 @@ int length;
 (e) For CustomVector class, show how the square brackets operator (indexing operator) can be overloaded to return a given indexed element. Should this operator be a class member function, and if so will it be private or public
 
 
+a construtor 
 #include <iostream>
-#include<vector>
+
 using namespace std;
+
+#include<vector>
+
+
 class CustomVector {
 public:
 CustomVector(vector<int> vec)
 {
-    cout<<"size\n"<<vec.size();
+    cout<<"size of vector \n"<<vec.size();
+}
+CustomVector(int length)
+{
+    length=length*length;
+    cout<<"Length is\n"<<length;
 }
 CustomVector(vector<int> length,vector<double> elements)
 {
@@ -34,24 +44,35 @@ CustomVector(vector<int> length,vector<double> elements)
   elements.push_back(20);
   elements.push_back(30);
   elements.push_back(40);
-  cout<<"\nvector elements";
+  cout<<"\nvector elements\n";
   cout<<elements[1];
   cout<<endl;
   cout<<elements[2];
   cout<<endl;
   cout<<elements[3];
   cout<<endl;
-  cout<<elements.back();  
+  cout<<elements.back();
 }
+CustomVector(const CustomVector &vecto)
+{
+   
+    length=vecto.length;
+    cout<<"\nCopy constructor";
+}
+
+
 private: 
 // private data 
 vector< double> elements; 
 int length; 
 vector<int> vec;
-
 };
+
 int main()
 {
+   
    CustomVector(vector<int> (4));
    CustomVector(vector<int>(4),vector<double> (1));
+   CustomVector vecto(9);
+   CustomVector copy=vecto;
 }
