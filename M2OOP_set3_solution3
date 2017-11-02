@@ -12,7 +12,7 @@ string type;
 int Discountprice;
 void display()
 {
-if(type=="Notbooked"&&hour>=6)
+if(type=="NotBooked"&&hour>=6)
 {
 Discountprice=price*(5/100);
 }
