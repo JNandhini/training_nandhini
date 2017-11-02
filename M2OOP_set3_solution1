@@ -6,6 +6,12 @@ For simplicity you can assume that any song or album has a single “artist” v
 
 
 
+In Music Player the songs can be easily searched.
+If the user searches for particular song then that songs is available.The song has its name,the album,the artists and the release year.
+If the searches for the artists then the songs composed by the artists is displayed.
+If the user searches for the album then the fullsonglist is displayed.
+ If the user creates the playlist it contains various songs from different albums.
+
 class songs
 {
 public:
