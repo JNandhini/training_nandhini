@@ -20,7 +20,7 @@ else
 {
 cout<<price;
 }
-if(>=2)
+if(hour>=2)
 {
 price=price;
 }
