@@ -3,7 +3,7 @@ a.	If tickets were not booked in the last 6 hours, the prices should fall by 5%.
 
 class ticketing
 {
-public:
+
 string ShowName;
 int price;
 int BookingOpen;
