@@ -26,7 +26,7 @@ public:
 string singer;
 string MusicDirector;
 };
-class albums:public songs,public artists
+class albums:public artists
 {
 string AlbumName;
 string director;
