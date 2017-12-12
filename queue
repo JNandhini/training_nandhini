@@ -1,0 +1,664 @@
+#include "organization.h"
+#include"queueclass.h"
+#include<vector>
+void organization::employe_details()
+{ 
+	    cout << "Enter the details of the employee\n";
+	
+		employ.EmpId.push_back(employ.id);
+		
+		cout << "Enter the employee name\n";
+		cin >> employ.name;
+		employ.validate_name();
+		cout << "Enter the employee year\n";
+		cin >> employ.year;
+		employ.validate_year();
+		cout << "Enter the employee pay\n";
+		cin >> employ.pay;
+		employ.validate_pay();
+		cout << "Enter the employee department\n";
+		cin >> employ.department;
+		employ.validate_department();
+		employ.EmpDepartment.push_back(employ.department);
+		
+		std::string Id = std::to_string(employ.id);
+		Id = employ.value + Id;
+		employ.Id.push_back(Id);
+		employ.id = employ.id++;
+		cqueue.copying_details(employ.EmpId,employ.EmpName,employ.EmpDepartment);
+}
+
+void organization::name_by_year()
+{
+	int Year;
+	value = 0;
+	cout << "Enter the year of joining";
+	cin >> Year;
+	cout << endl;
+	for (iterat = 0; iterat < (int)employ.EmpId.size(); iterat++)
+	{
+		if (employ.EmpYear.at(iterat) == Year)
+		{
+			cout << employ.EmpName.at(iterat);
+			value++;
+		}
+	}
+	if (value==0)
+	{ 
+		cout << "The record is not available\n";
+
+	}
+	
+}
+void organization::highest_pay()
+{
+	string Department;
+	static float temp = 0.0;
+	int index = 0;
+	value = 0;
+	cout << "Enter the Department of the employee\n";
+	cin >> Department;
+	cout << endl;
+	for (iterat = 0; iterat < (int)employ.EmpId.size(); iterat++)
+	{
+		if (employ.EmpDepartment.at(iterat) == Department)
+		{
+			if (employ.EmpPay.at(iterat)>temp)
+			{
+				temp = employ.EmpPay.at(iterat);
+				index = iterat;
+				value++;
+			}
+
+		}
+
+	}
+			if (value == 0)
+			{
+				cout << "The record is not available\n";
+
+			}
+			if (value != 0)
+			{
+				cout << employ.Id.at(index);
+				cout << endl;
+				cout << "\nthe employee name\t";
+				cout << employ.EmpName.at(index);
+				cout << "\n";
+				cout << "the employee year\t";
+				cout << employ.EmpYear.at(index);
+				cout << "\n";
+				cout << "the employee pay\t";
+				cout << employ.EmpPay.at(index);
+				cout << "\n";
+				cout << "the employee department\t";
+				cout << employ.EmpDepartment.at(index);
+				cout << "\n";
+			}
+			
+}
+void organization::display_by_ascending_order()
+{ 
+	
+	for (iterat =0; iterat < (int)employ.EmpId.size(); iterat++)
+	{
+			cout << employ.Id.at(iterat);
+			cout << "\nThe employee name\t";
+			cout << employ.EmpName.at(iterat);
+			cout << "\n";
+			cout << "The employee year\t";
+			cout << employ.EmpYear.at(iterat);
+			cout << "\n";
+			cout << "The employee pay\t";
+			cout << employ.EmpPay.at(iterat);
+			cout << "\n";
+			cout << "The employee department\t";
+			cout << employ.EmpDepartment.at(iterat);
+			cout << "\n";
+
+		
+	}
+}
+
+void organization::update_pay()
+{
+	int Id=0;
+	value = 0;
+	cout << "Enter the Id of the employee";
+	cin >> Id;
+	cout << endl;
+	for (iterat = 0; iterat <(int)employ.EmpId.size(); iterat++)
+	{
+		if (employ.EmpId.at(iterat) == Id)
+		{
+			cout << endl;
+			cout <<employ.EmpPay.at(iterat);
+			employ.EmpPay.at(iterat) = (105 * employ.EmpPay.at(iterat)) / 100;
+			cout << endl;
+			cout << employ.EmpPay.at(iterat)<<endl;
+			value++;
+		}
+		
+	}
+	if (value == 0)
+	{
+		cout << "The Id is not available\n";
+
+	}
+}
+int main()
+{
+
+	organization organize;
+	char choice;
+     	cout << "a.Display employee name by particaular year\nb.Display all details by department with highest pay \nc.Display all details by ascending order\nd.update pay by particaular id\ne.push details\nf.remove and add employee\ng.exit\n";
+		while (1)
+		{
+			cout << "\nEnter the choice\n";
+			cin >> choice;
+			if (choice == 'a' || choice == 'b' || choice == 'c' || choice == 'd' || choice == 'e' || choice == 'f' || choice == 'g')
+			{
+				cout << endl;
+
+				switch (choice)
+				{
+				case 'a':
+					organize.employe_details();
+					break;
+				case 'b':
+					organize.name_by_year();
+					break;
+				case 'c':
+					organize.highest_pay();
+					break;
+				case 'd':
+					organize.display_by_ascending_order();
+					break;
+				case 'e':
+					organize.update_pay();
+					break;
+
+				case 'f':
+					organize.cqueue.push_details();
+					break;
+				case 'g':
+					organize.cqueue.pop_details();
+					organize.cqueue.remove_employee();
+					organize.cqueue.add_employee();
+					organize.cqueue.after_queue();
+					break;
+				case 'h':
+					exit(1);
+				default:
+					cout << "invalid choice";
+					break;
+				}
+
+			}
+
+			else
+			{
+				cout << "invalid choice";
+				break;
+			}
+		}
+}#pragma once
+
+#include<iostream>
+
+#include <vector>
+
+#include<string>
+
+#include<regex>
+
+using namespace std;
+
+class employee
+
+{
+
+public:
+
+	int id = 101;
+
+	string value = "EMP";
+
+	string name;
+
+	int year=0;
+
+	float pay=0.0;
+
+	string department;
+
+	vector<int> EmpId;
+
+	vector<string>Id;
+
+	vector<string> EmpName;
+
+	vector <int> EmpYear;
+
+	vector <float> EmpPay;
+
+	vector <string> EmpDepartment;
+
+ public:
+
+	 void validate_name();
+
+	 void validate_year();
+
+	 void validate_pay();
+
+	 void validate_department();
+
+	 
+
+};
+
+#include "employee.h"
+#include<regex>
+void employee::validate_name()
+{
+	 if (!(cin.fail()) && (name.size() > 3))
+	{
+		EmpName.push_back(name);
+	}
+	else  
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cout << "Enter the name with atleast 3 characters";
+		cin >> name;
+		validate_name();
+	}
+
+}
+void employee::validate_year()
+{
+	if (cin.fail())
+
+	{
+		cin.clear();
+		cin.ignore(10000, '\n');
+		
+	}
+	if ((year > 0 && year >= 1900 && year <= 2017))
+	{
+		EmpYear.push_back(year);
+	}
+	else
+	{
+		cin.clear();
+		cout << "wrong input  ";
+		cout << endl;
+		cout << "Enter the year correctly\n";
+		cin >> year;
+		validate_year();
+	}
+}
+	
+	
+
+void employee::validate_pay()
+{
+	if (cin.fail())
+
+	{
+		cin.clear();
+		cin.ignore(10000, '\n');
+	}
+	if (pay > 100 )
+	{
+		EmpPay.push_back(pay);
+	}
+	else
+	{
+		cin.clear();
+		cout << "wrong input  ";
+		cout << endl;
+		cout << "Enter the pay correctly\n";
+		cin >> pay;
+		validate_pay();
+	}
+
+}
+
+void employee::validate_department()
+{
+
+　
+	if (!(cin.fail()) && (department.size() > 3))
+	{
+		
+			EmpDepartment.push_back(department);
+	}
+
+	else
+	{
+
+		cin.clear();
+		cout << "input a string with length greater than 3\n";
+		cout << "enter the department\n";
+		cin >> department;
+		validate_department();
+	}
+	}#pragma once
+
+#include<iostream>
+
+#include<vector>
+
+#include<string>
+
+using namespace std;
+
+#include "employee.h"
+
+class queueclass
+
+{
+
+public:
+
+	
+
+	int size = 0;
+
+	int iterat = 0;
+
+	vector<int> EmployId;
+
+	vector<string> EmployName;
+
+	vector<string> EmployDepartment;
+
+	vector<int> BenchQueue;
+
+	vector<int> ProjectQueue;
+
+	vector<int>::iterator count;
+
+	int EmployeeId=0;
+
+	int Id=0;
+
+	int EmployeeToBench=0;
+
+	int EmployeeToProject=0;
+
+public:
+
+	void copying_details(vector<int> EmpId, vector<string> EmpName, vector<string> EmpDepartment);
+
+	void push_details();
+
+	void pop_details();
+
+	void add_employee();
+
+	void remove_employee();
+
+	void after_queue();
+
+
+};
+
+#pragma once
+#include<vector>
+#include "employee.h"
+#include "queueclass.h"
+class organization
+{
+public:
+	employee employ;
+	queueclass cqueue;
+	int iterat=0;
+	int value = 0;
+	
+    public:
+	void employe_details();
+    void name_by_year();
+	void highest_pay();
+	void display_by_ascending_order();
+	void update_pay();
+	void push_details();
+	
+};#include "queueclass.h"
+
+#include<vector>
+
+void queueclass:: copying_details(vector<int> EmpId,vector<string> EmpName,vector<string> EmpDepartment)
+
+{
+
+EmployId.swap(EmpId);
+
+EmployName.swap(EmpName);
+
+EmployDepartment.swap(EmpDepartment);
+
+}
+
+
+void queueclass::push_details()
+
+{
+
+		int value = 0;
+
+		
+
+		cout << "Enter the employee in bench\n";
+
+		cin >> EmployeeId;
+
+		for (iterat = 0; iterat < EmployId.size(); iterat++)
+
+		{
+
+			if (EmployId.at(iterat) == EmployeeId)
+
+			{
+
+				
+
+				BenchQueue.push_back(EmployeeId);
+
+				value++;
+
+
+			}
+
+		}
+
+		if (value == 0)
+
+		{
+
+			cout << "No records found\n";
+
+		}
+
+
+　
+
+		cout << "Enter the employee in project\n";
+
+		cin >> Id;
+
+		
+
+		for (iterat = 0; iterat < EmployId.size(); iterat++)
+
+		{
+
+			if (EmployId.at(iterat) == Id)
+
+			{
+
+
+　
+
+				ProjectQueue.push_back(Id);
+
+				value++;
+
+			}
+
+		}
+
+
+		if (value == 0)
+
+		{
+
+			cout << "no records found\n";
+
+
+		}
+
+
+　
+
+　
+
+	}
+
+void queueclass::pop_details()
+
+{
+
+
+	if (BenchQueue.begin() == BenchQueue.end())
+
+	{
+
+		cout << "queue is empty\n";
+
+	}
+
+	else
+
+	{
+
+		cout << endl;
+
+		cout << "\nThe bench List is\n";
+
+		for (iterat = 0; iterat < BenchQueue.size(); iterat++)
+
+		{
+
+
+			cout << BenchQueue.at(iterat) << endl;
+
+
+		}
+
+		cout << "\nThe project queue is\n";
+
+		for (iterat = 0; iterat < ProjectQueue.size(); iterat++)
+
+		{
+
+
+			cout << ProjectQueue.at(iterat) << endl;;
+
+
+		}
+
+	}
+
+}
+
+void queueclass::remove_employee()
+
+{
+
+	if (BenchQueue.begin() == BenchQueue.end())
+
+	{
+
+		cout << "queue is empty\n";
+
+	}
+
+	else
+
+	{
+
+		EmployeeToBench = ProjectQueue.front();
+
+		cout << "\nthe employee removed from project is\n " << EmployeeToBench;
+
+		cout << endl;
+
+		EmployeeToProject = BenchQueue.front();
+
+		cout << "\nThe employee removed from bench is\n" << EmployeeToProject;
+
+		BenchQueue.erase(BenchQueue.begin());
+
+		ProjectQueue.erase(ProjectQueue.begin());
+
+	}
+
+}
+
+void queueclass::add_employee()
+
+{
+
+	if (BenchQueue.begin() == BenchQueue.end())
+
+	{
+
+		cout << "queue is empty\n";
+
+	}
+
+	else
+
+	{
+
+		BenchQueue.push_back(EmployeeToBench);
+
+		ProjectQueue.push_back(EmployeeToProject);
+
+	}
+
+}
+
+void queueclass::after_queue()
+
+{
+
+	cout << endl;
+
+	for (iterat = 0; iterat < BenchQueue.size(); iterat++)
+
+	{
+
+		cout << "\nThe bench queue is\n";
+
+		cout << BenchQueue.at(iterat);
+
+
+	}
+
+	for (iterat = 0; iterat < ProjectQueue.size(); iterat++)
+
+	{
+
+		cout << "\nThe project queue is\n";
+
+		cout <<ProjectQueue.at(iterat);
+
+
+	}
+
+}
+
