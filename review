@@ -1,0 +1,10 @@
+Execution:1. A String value shall accept input with or without space2. Give proper new line, messages for the displayed texts such that it is easily readable and understandable3. Employee project is an important field considering the employee management system4. Show correct warning messages such that it guides the user correctly.5. Department is assigned "software" even if I enter the input as "department" (inconsistent output)6. Correct the PROJECT -> BENCH and BENCH -> PROJECT concept. Current implementation of (f) and (h) incorrect.7. application crashes on printing the employee details in BENCH queue
+Code Review:1. Do not hardcode incremental values like year, age, etc2. implement a queue.   Define BENCH which is of type queue.
+------------------------------------------------------------------------Correct method:
+Class Queue{  Vector<Employee> bench; --> Employee - class , Employee e -> e - Object  push();  pop();  isEmpty();  isFull();}
+class Orginisation{  Queue bench;  Queue lunch;}
+--------------------------------------------------------------------------Incorrect method:
+class QueueClass{ Vector<Employee> data; Vector<File> wing1_printer1;   Vector<File> wing1_printer2;   Vector<File> wing1_printer3;  }
+class Organisation{   QueueClass qc = new QueueClass();   qc.data;   qc.wing1_printer1;   qc.wing1_printer2;     qc.wing1_printer3;  }
+int a;  int //defineint bint c
+Vector<int> productIds; // Vector: int[] dataVector<int> employeeIds; 
