@@ -1,0 +1,308 @@
+#pragma once
+#include<iostream>
+#include <string>
+#include<vector>
+using namespace std;
+class tree
+{
+public:
+	int iterat = 0;
+	float price = 0.0;
+	string name;
+	tree* left;
+	tree* right;
+	vector<float>pric;
+	
+public:
+	void insert(tree* &point,float cost,string name);
+	void display();
+	void balance(tree* point);
+	int balance_factor(tree* point);
+	void rotate_right(tree* point);
+	void rotate_left(tree* point);
+	void left_right_rotate(tree* point);
+	void right_left_rotate(tree* point);
+	int height(tree* point);
+	void mirror_copy(tree* point);
+	void inorder(tree* point);
+	void no_of_products(tree* &point,float cost);
+	void copy_tree(tree *&copy,tree *&point);
+	
+	
+	
+};
+#include "tree.h"
+
+int tree::height(tree* point)
+{
+	int LeftHeight = 0;
+	int RightHeight = 0;
+	if (point == NULL || point->left == NULL || point->right == NULL)
+	{
+		return 0;
+	}
+
+	if (point->left)
+	{
+		LeftHeight = height(point->left);
+	}
+	if (point->right)
+	{
+		RightHeight = height(point->right);
+	}
+	if (RightHeight > LeftHeight)
+	{
+		 RightHeight++;
+		 cout << "\nhr\n" << RightHeight;
+	}
+	else
+	{
+		 LeftHeight++;
+		 cout << "\nhl\n" << LeftHeight;
+	}
+
+}
+int tree::balance_factor(tree* point)
+{   
+	cout << "\nbalancing factor of the tree is\n";
+	int balanc=height(point->right) - height(point->left);
+	cout << balanc;
+	return balanc;
+	
+}
+void  tree:: balance(tree* point)
+{
+	if (balance_factor(point) == 2)
+	{
+		if (balance_factor(point->right) < 0)
+
+			rotate_left(point->right);
+		rotate_right(point);
+	
+	}
+	if (balance_factor(point) == -2)
+	{
+		if (balance_factor(point->left) > 0)
+
+			rotate_right(point->left);
+		rotate_left(point);
+
+	}
+}
+void tree::insert(tree* &point,float cost,string name )
+{
+	if (point == NULL)
+	{
+		point = new tree;
+		point->price = cost;
+		point->name = name;
+		point->left = NULL;
+		point->right = NULL;
+		
+		
+	}
+	else if (point->price>cost)
+	{
+		
+	    insert(point->left, cost,name);
+			
+	}
+	else
+	{
+	   insert(point->right, cost,name);
+	  
+	   
+	}
+	balance_factor(point);
+	//balance(point);
+}
+ void tree::rotate_left(tree* point)
+{
+	tree* rotate;
+	rotate = point->right;
+	point->right = point->left;
+	point->left = rotate;
+	height(point);
+	height(rotate);
+
+}
+ void tree:: rotate_right(tree* point)
+{
+	tree* rotate;
+	rotate = point->left;
+	point->left = point->right;
+	point->right = rotate;
+	height(point);
+	height(rotate);
+
+}
+void tree::left_right_rotate(tree* point)
+{
+	rotate_left(point-> left);
+	rotate_right(point);
+
+}
+void tree::right_left_rotate(tree *point)
+{
+	rotate_right(point->right);
+	rotate_left(point);
+}
+
+void tree::inorder(tree* point)
+{
+	if (point!=NULL)
+	{
+		inorder(point->left);
+		cout << "\nThe name is" << point->name;
+		cout << "\nThe price is" << point->price;
+		inorder(point->right);
+	
+	}
+}
+void tree::copy_tree(tree *&copy, tree *&point)
+{
+	if (point != NULL)
+		
+	{
+		copy = new tree;
+		copy->price = point->price;
+		copy->name = point->name;
+		copy_tree(copy->left, point->left);
+		copy_tree(copy->right, point->right);
+	}
+	
+	
+	mirror_copy(copy);
+}
+
+void tree:: mirror_copy(tree* copy)
+{
+	tree *temp;
+	if (copy != NULL)
+
+	{
+		mirror_copy(copy->left);
+		mirror_copy(copy->right);
+		temp = copy->left;
+		copy->left = copy->right;
+		copy->right = temp;
+	}
+	
+}
+
+void tree:: no_of_products(tree* &point, float cost)
+{
+	int iterat = 1;
+
+	if (point == NULL)
+	{
+		cout << "tree is empty\n";
+	}
+	else
+	{ 
+		if (point->price == cost)
+		{ 
+			cout << "The price is";
+			cout << point->price <<endl;
+			cout << "The product name is";
+			cout << point->name;
+			cout << "\nThe no of products are";
+			cout << iterat++;
+		}
+		else if ( point->price>cost)
+		{
+
+			
+			if (point->price==cost)
+			{
+				cout << "The price is\n";
+				cout << point->price;
+				cout << "The product name is\n";
+				cout << point->name<<endl;
+				iterat++;
+				cout << "The no of products are\n";
+				cout << iterat;
+			}
+
+			no_of_products(point->left, cost);
+		}
+		else if (point->price<cost)
+		{
+			if (point->price == cost)
+			{
+				iterat++;
+				cout << "The no of products are\n";
+				cout << iterat;
+			}
+			no_of_products(point->right, cost);
+		}
+		else
+		{
+			cout << "\nThe product is not available";
+		}
+
+	}
+	for (int iterate = 0; iterate < pric.size(); iterate++)
+	{
+		cout << pric.at(iterate);
+	}
+	
+	
+}
+
+int main()
+{
+	tree tre;
+	tree *root = NULL; tree *rt;
+	char choice;
+	float price = 0.0;
+	string name ;
+	vector<float>pric;
+	int iterat = 0;
+	while (1)
+	{
+		cout << "\na.insert the values\nb.mirror copy\nc.sorting\nd.display number of products\n";
+		cout << "Enter the  choice\n";
+		cin >> choice;
+		if (choice == 'a' || choice == 'b' || choice == 'c'||choice=='d')
+		{
+			switch (choice)
+			{
+			case 'a':
+				cout << "\nEnter the product name";
+				cin >> name;
+				cout << "\nEnter the product price";
+				cin >> price;
+				pric.push_back(price);
+				cout << pric.at(iterat);
+				iterat++;
+				if (cin.fail())
+				{
+					cout << "invalid input for price";
+					cin >> price;
+				}
+				tre.insert(root, price, name);
+				break;
+			case 'b':
+				tre.copy_tree(rt, root);
+				tre.inorder(rt);
+				break;
+			case 'c':
+				cout << "sorting by price";
+				tre.inorder(root);
+				break;
+			case 'd':
+				cout << "Number of products\n";
+				cout << "enter the price\n";
+				cin >> price;
+				tre.no_of_products(root,price);
+				break;
+			}
+		}
+		else
+		{
+			cout << "Invalid choice";
+			system("pause");
+		}
+	}
+}
