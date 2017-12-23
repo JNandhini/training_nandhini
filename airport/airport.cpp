@@ -4,10 +4,12 @@ void Airport:: get_details()
 {
 	cout << "Enter the Airport Name" << endl;
 	cout << "The Airport Name is" << endl;
-	cin >> AirportName;
+	cin.ignore();
+	getline(cin,AirportName);
 	cout << endl;
 	cout << "Enter the FlightName" << endl;
-	cin >> FlightName;
+	cin.ignore();
+	getline(cin,FlightName);
 	cout << endl;
 }
 void Airport::request_generation()
@@ -27,12 +29,13 @@ void Airport::request_generation()
 		cout << "The flight id is" << endl;
 		cout << request.FlightId;
 		request.set_flightid(request.FlightId);
-		cout << "Enter the state of the flight as landing or takeofff" << endl;
-		cin >>request.state;
+		cout << "Enter the  state of the flight as landing or takeofff" << endl;
+		cin.ignore();
+		getline(cin,request.state);
 		request.set_flightstate(request.state);
 		cout << "\nThe flight id" << request.FlightId << "is requesting for runnway\n";
 		cout << "The request Time is" << request.seconds;
-		request.set_flighttime(request.seconds);
+		request.set_flighttime(ctime(StartTime ));
 		requet.push_back(request);
 		allocation_of_runway(request.FlightId, request.state, request.time);
 	}
@@ -43,13 +46,14 @@ void Airport :: allocation_of_runway(int Flightid,string state,int time)
 	if (runway1 == busy)
 	{
 		cout << "The runway1 is allocated"<<endl;
-		cout << "Request cannot be honored right now" << endl;
+		cout << "Request cannot be honored right now\n" << endl;
+		
 		
 	}
 	else if (runway1==idle)
 	{
 		runway1 = request.FlightId;
-		cout << "Runway is allocated to" << request.FlightId<<endl;
+		cout << "Runway is allocated to\n" << request.FlightId<<endl;
 		
 	}
 
@@ -80,10 +84,27 @@ void Airport :: allocation_of_runway(int Flightid,string state,int time)
 			queue.push(takeoff[iterate]);
 		}
 	}
+	
 
 }
 void Airport::checking_for_runway_availablity()
 {
+	if(queue.landing! =isempty())
+	{
+          for(int count=0;count<queue.landing.size();count++)
+	  {    cout<<"\nThe number of flights in landing queue is\n";
+		  cout<<queue.landing.at(count);
+	  }
+	}
+	if(queue.takeoff!=isempty())
+	{
+		for(int count=0;count<queue.takeoff.size();count++)
+		{
+			cout<<"The number of flights in takeoff queue is\n";
+			cout<<queue.takeoff.at(count);
+		}
+	}
+}
 
 }
 Airport::Airport()
