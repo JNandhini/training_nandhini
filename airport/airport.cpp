@@ -12,19 +12,21 @@ void Airport:: get_details()
 	getline(cin,FlightName);
 	cout << endl;
 }
-void Airport::request_generation()
+void Airport::request_generation(chrono::seconds ms)
 {
 
-	std::chrono::time_point<std::chrono::system_clock> start, end;
-	start = std::chrono::system_clock::now();
-	request.StartTime = std::chrono::system_clock::to_time_t(start);
+	
 	cout << request.ltm->tm_sec;
 	request.hour = request.ltm->tm_hour;
 	//seconds = ltm->tm_sec;
-	request.seconds = request.now + 5;
+	request.seconds = request.now + 500;
 	//tim = seconds+tim;
-	if (request.seconds < 7200)
-	{
+	this_thread::sleep_for(chrono::seconds(request.seconds));
+	std::chrono::time_point<std::chrono::system_clock> start, end;
+	start = std::chrono::system_clock::now();
+	request.StartTime = std::chrono::system_clock::to_time_t(start);
+	cout<<ctime(&StartTime);
+	cout<<end;
 		request.FlightId = (rand() % 9000) + 1000;
 		cout << "The flight id is" << endl;
 		cout << request.FlightId;
@@ -37,14 +39,14 @@ void Airport::request_generation()
 		cout << "The request Time is" << request.seconds;
 		request.set_flighttime(ctime(StartTime ));
 		requet.push_back(request);
-		allocation_of_runway(request.FlightId, request.state, request.time);
-	}
+         	allocation_of_runway(request.FlightId, request.state, request.time);
+	
 
 }
 void Airport :: allocation_of_runway(int Flightid,string state,int time)
 {
 	if (runway1 == busy)
-	{
+	{      thread_this::sleep_for(chrono::seconds(7200));      
 		cout << "The runway1 is allocated"<<endl;
 		cout << "Request cannot be honored right now\n" << endl;
 		
@@ -87,10 +89,10 @@ void Airport :: allocation_of_runway(int Flightid,string state,int time)
 	
 
 }
-void Airport::checking_for_runway_availablity()
+void Airport::checking_for_runway_availablity(chrono::seconds ms)
 {
 	if(queue.landing! =isempty())
-	{
+	{ allocation_of_runway();
           for(int count=0;count<queue.landing.size();count++)
 	  {    cout<<"\nThe number of flights in landing queue is\n";
 		  cout<<queue.landing.at(count);
@@ -98,6 +100,7 @@ void Airport::checking_for_runway_availablity()
 	}
 	if(queue.takeoff!=isempty())
 	{
+		allocation_of_runway();
 		for(int count=0;count<queue.takeoff.size();count++)
 		{
 			cout<<"The number of flights in takeoff queue is\n";
@@ -107,6 +110,21 @@ void Airport::checking_for_runway_availablity()
 }
 
 }
+int main()
+{
+	std::chrono::seconds ms(4);
+  std::chrono::time_point<std::chrono::high_resolution_clock>start, end;
+ start=chrono::high_resolution_clock::now(); 
+  std::time_t start_time = std::chrono::high_resolution_clock::to_time_t(start);
+  cout<<ctime(&start_time);
+        end = std::chrono::high_resolution_clock::now() + ms; // this is the end point
+    std::time_t end_time = std::chrono::high_resolution_clock::to_time_t(end);
+    
+    while(std::chrono::high_resolution_clock::now() < end) // still less than the end?
+    {   
+    airport.request_generation(ms);
+} cout<<ctime(&end_time);
+   
 Airport::Airport()
 {
 }
