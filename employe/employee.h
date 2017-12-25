@@ -16,12 +16,7 @@ public:
 	int year=0;
 	float pay=0.0;
 	string department;
-	vector<int> EmpId;
-	vector<string>Id;
-	vector<string> EmpName;
-	vector <int> EmpYear;
-	vector <float> EmpPay;
-	vector <string> EmpDepartment;
+	
  public:
 	 void validate_name();
 	 void validate_year();
