@@ -8,29 +8,31 @@ void organization::employe_details()
 { 
 	    cout << "Enter the details of the employee\n";
 	
-		employ.EmpId.push_back(employ.id);
+		employ.set_id(Id);
 		
 		cout << "Enter the employee name\n";
 		cin >> employ.name;
-
+                employ.set_name(employ.name);       
+	     
 		//calling the function 
 
 		employ.validate_name();
 		cout << "Enter the employee year\n";
 		cin >> employ.year;
 		employ.validate_year();
+	        employ.set_year(employ.year);       
 		cout << "Enter the employee pay\n";
 		cin >> employ.pay;
-		employ.validate_pay();
+		employ.validate_pay(); 
 		cout << "Enter the employee department\n";
-		cin >> employ.department;
-		employ.validate_department();
-		employ.EmpDepartment.push_back(employ.department);
-		
+		cin >> employ.Department;
+		employ.validate_Department();
+	        employ.set_department(employ.Department);       
 		std::string Id = std::to_string(employ.id);
 		Id = employ.value + Id;
 		employ.Id.push_back(Id);
 		employ.id = employ.id++;
+	        empl.push_back(employ);
 		cqueue.copying_details(employ.EmpId,employ.EmpName,employ.EmpDepartment);
 }
 
@@ -45,11 +47,11 @@ void organization::name_by_year()
 	if (!cin.fail() && Year >= 1900 && Year <= 2017)
 	{
 		cout << endl;
-		for (iterat = 0; iterat < (int)employ.EmpId.size(); iterat++)
+		for (iterat = 0; iterat < (int)empl.size(); iterat++)
 		{
-			if (employ.EmpYear.at(iterat) == Year)
+			if (employ.get_year() == Year)
 			{
-				cout << employ.EmpName.at(iterat);
+				cout << employ.at(iterat);
 				value++;
 			}
 		}
@@ -82,15 +84,15 @@ void organization::highest_pay()
 	cin >> Department;
 Department:employ.validate_department();
 	cout << endl;
-	for (iterat = 0; iterat < (int)employ.EmpId.size(); iterat++)
+	for (iterat = 0; iterat < (int)empl.size(); iterat++)
 	{
 		
 
 		//checks for the department
 
-		if (employ.EmpDepartment.at(iterat) == Department)
+		if (employ.get_department() == Department)
 		{
-			if (employ.EmpPay.at(iterat)>temp)
+			if (empl.at(iterat)>temp)
 			{
 				temp = employ.EmpPay.at(iterat);
 				index = iterat;
@@ -113,19 +115,19 @@ Department:employ.validate_department();
 			}
 			if (value != 0)
 			{
-				cout << employ.Id.at(index);
+				cout << employ.at(index);
 				cout << endl;
 				cout << "\nthe employee name\t";
-				cout << employ.EmpName.at(index);
+				cout << employ.at(index);
 				cout << "\n";
 				cout << "the employee year\t";
-				cout << employ.EmpYear.at(index);
+				cout << employ.at(index);
 				cout << "\n";
 				cout << "the employee pay\t";
-				cout << employ.EmpPay.at(index);
+				cout << employ.at(index);
 				cout << "\n";
 				cout << "the employee department\t";
-				cout << employ.EmpDepartment.at(index);
+				cout << employ.at(index);
 				cout << "\n";
 			}
 			
@@ -137,20 +139,20 @@ Department:employ.validate_department();
 void organization::display_by_ascending_order()
 { 
 	
-	for (iterat =0; iterat < (int)employ.EmpId.size(); iterat++)
+	for (iterat =0; iterat < (int)empl.size(); iterat++)
 	{
-			cout << employ.Id.at(iterat);
+			cout << employ.at(iterat);
 			cout << "\nThe employee name\t";
-			cout << employ.EmpName.at(iterat);
+			cout << employ.at(iterat);
 			cout << "\n";
 			cout << "The employee year\t";
-			cout << employ.EmpYear.at(iterat);
+			cout << employ.at(iterat);
 			cout << "\n";
 			cout << "The employee pay\t";
-			cout << employ.EmpPay.at(iterat);
+			cout << employ.at(iterat);
 			cout << "\n";
 			cout << "The employee department\t";
-			cout << employ.EmpDepartment.at(iterat);
+			cout << employ.at(iterat);
 			cout << "\n";
 
 		
@@ -170,13 +172,13 @@ void organization::update_pay()
 		cout << endl;
 		for (iterat = 0; iterat < (int)employ.EmpId.size(); iterat++)
 		{
-			if (employ.EmpId.at(iterat) == Id)
+			if (employ.get_id() == Id)
 			{
 				cout << endl;
-				cout << employ.EmpPay.at(iterat);
-				employ.EmpPay.at(iterat) = (1.05 * employ.EmpPay.at(iterat));
+				cout << employ.at(iterat);
+				employ.at(iterat) = (1.05 * employ.at(iterat));
 				cout << endl;
-				cout << employ.EmpPay.at(iterat) << endl;
+				cout << employ.at(iterat) << endl;
 				value++;
 			}
 
