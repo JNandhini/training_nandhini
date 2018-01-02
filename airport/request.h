@@ -18,6 +18,7 @@ public:
 	int minutes = 0;
 	int time=0;
 	string state;
+	string FlightName
 	int seconds = 0;
 	int count = 0;
 public:
@@ -28,6 +29,8 @@ public:
 	string get_flightstate();
 	void set_flighttime(int time);
 	int get_flighttime();
+	void set_flightname(string FlightName);
+	string get_flightname(); 
 	void request_generation();
 	Request();
 	~Request();
