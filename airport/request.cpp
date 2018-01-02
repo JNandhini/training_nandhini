@@ -19,13 +19,21 @@ string Request::get_flightstate()
 {
 	return this->state;
 }
-void Request::set_flighttime(int time)
+void Request::set_flighttime(time_t time)
 {
 	this->time;
 }
 int Request::get_flighttime()
 {
 	return this->time;
+}
+void Request::set_flightname(string FlightName)
+{
+	this->FlightName;
+}
+string Request::get_flightname()
+{
+	return this->FlightName;
 }
 
 Request::Request()
