@@ -18,11 +18,10 @@ public:
 	int minutes = 0;
 	int time=0;
 	string state;
-	string FlightName
+	string FlightName;
 	int seconds = 0;
 	int count = 0;
 public:
-	//void id_generation();
 	void set_flightid(int FlightId);
 	int get_flightid();
 	void set_flightstate(string state);
