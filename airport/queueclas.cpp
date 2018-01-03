@@ -91,19 +91,5 @@ void Queueclas::display()
 
 }
 
-bool Queueclas::isempty()
 
-{
-
-	if (landing.empty())
-
-	{
-
-		cout << "queue is empty";
-
-		return 0;
-
-	}
-
-}
     
