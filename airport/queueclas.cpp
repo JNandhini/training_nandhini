@@ -1,10 +1,10 @@
-#include "Queueclas.h"
+#include "queueclas.h"
 
 #include<iostream>
 
 using namespace std;
 
-void Queueclas::push(Request req)
+void queueclas::push(Request req)
 
 {
 
@@ -27,7 +27,7 @@ void Queueclas::push(Request req)
 }
 
 
-void Queueclas::pop()
+void queueclas::pop()
 
 {
 
@@ -49,7 +49,7 @@ void Queueclas::pop()
 
 }
 
-void Queueclas::display()
+void queueclas::display()
 
 {
 
