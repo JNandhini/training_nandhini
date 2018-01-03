@@ -1,16 +1,16 @@
  #pragma warning(disable:4996) 
- #include"Airport.h" 
+ #include"airport.h" 
  #include<future>
- Airport airport;　
+ airport Airport;　
  void call();
  void calling();
  int main()
  {
- Airport airport; 
- airport.get_details();
+ airport Airport; 
+ Airport.get_details();
  async(call);
  async(calling);
- airport.queue.display();
+ Airport.queue.display();
  system("pause");
  cin.ignore(1000,'\n');
  }
@@ -25,7 +25,7 @@
  std::time_t end_time = std::chrono::system_clock::to_time_t(end); 
  while (std::chrono::system_clock::now() < end)
  {
- airport.request_generation();
+ Airport.request_generation();
  }
  }
  void calling()
@@ -39,6 +39,6 @@
  std::time_t end_time = std::chrono::system_clock::to_time_t(end);
  while (std::chrono::system_clock::now() < end)
  {
- airport.allocation_of_runway();
+ Airport.allocation_of_runway();
  }
  } 
