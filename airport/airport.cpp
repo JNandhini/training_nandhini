@@ -2,7 +2,7 @@
 
 //get the airport name
 
-void Airport::get_details()
+void airport::get_details()
 {
 cout << "Enter the Airport Name" << endl; 
 cout << "The Airport Name is" << endl;
@@ -13,7 +13,7 @@ cout << endl;
 
 //generates the runway request autonatically
 
-void Airport::request_generation()
+void airport::request_generation()
 { 
 std::chrono::time_point<std::chrono::system_clock> start;
 srand(time(0)); 
@@ -66,7 +66,7 @@ string second[4] = { "ways", "line", "india", "jet" };       
   
   //checking availability and allocating the runway for request 
   
-  int Airport::allocation_of_runway()
+  int airport::allocation_of_runway()
 {
  chrono::seconds min(9); 
  
@@ -93,7 +93,7 @@ if (!queue.landing.empty())
          start = chrono::system_clock::now();    
          std::time_t start_time = std::chrono::system_clock::to_time_t(start);
          end = chrono::system_clock::now()+min; 
-         chrono::duration <double>elapse_time = start_time - request.FlightTime; 
+         chrono::duration <double>elapse_time = rawtime - request.FlightTime; 
          cout << endl <<"The elapsed time is "<<elapse_time.count();  
         }  
         else if (runway2 == idle) 
@@ -110,7 +110,7 @@ if (!queue.landing.empty())
         cout << "iterator" << iterator;  
         end = chrono::system_clock::now(); 
         std::time_t Starttime = std::chrono::system_clock::to_time_t(starttime);   
-        chrono::duration <double>elapsed_time = Starttime- request.FlightTime;
+        chrono::duration <double>elapsed_time = rawtime- request.FlightTime;
         cout << endl <<"The elapsed time for the request is "<< elapsed_time.count(); 
         }
      }
@@ -132,7 +132,7 @@ if (!queue.landing.empty())
    ChechkTime=rawtime;
    std::time_t start_time = std::chrono::system_clock::to_time_t(start); 
    end = chrono::system_clock::now();
-   chrono::duration <double>elapse_time = start_time - request.FlightTime;  
+   chrono::duration <double>elapse_time = rawtime - request.FlightTime;  
    cout << endl <<"The elapsed time is"<< elapse_time.count(); 
    }
    }
@@ -149,7 +149,7 @@ if (!queue.landing.empty())
      time(&rawtime); 
      duration=rawtime;
      end = chrono::system_clock::now(); 
-     chrono::duration <double>elapse_time =  Start_time-request.FlightTime;   
+     chrono::duration <double>elapse_time = rawtime-request.FlightTime;   
      cout << endl <<"The elapsed time is "<< elapse_time.count(); 
      }
      }
