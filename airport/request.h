@@ -6,25 +6,28 @@
 #include<ctime>
 using namespace std;
 
+　
+//contains the details of request to the airport
+
 class Request
 {
 public:
-	
+
 	int FlightId = 0;
-	string state;
-	int FlightTime=0;
 	string FlightName;
-	public:
+	int FlightTime = 0;
+	string state;
+public:
 	void set_flightid(int FlightId);
 	int get_flightid();
+	void set_flightname(string FlightName);
+	string get_flightname();
 	void set_flightstate(string state);
 	string get_flightstate();
-	void set_flighttime(int time);
+	void set_flighttime(int FlightTime);
 	int get_flighttime();
-	void set_flightname(string FlightName);
-	string get_flightname(); 
-	Request();
-	~Request();
+	void request_generation();
+
 };
 
 　
