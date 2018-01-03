@@ -2,16 +2,18 @@
 #include<iostream>
 #include<vector>
 #include<string>
-#include"Airport.h"
+#include"airport.h"
 using namespace std;
-class Queueclas
+class queueclas
 {
 public:
+	int iterate=0;
 	vector<Request> landing;
 	vector<Request> takeoff;
 public:
 	void push(Request reque);
 	void pop();
+	void display();
 	Queueclas();
 	~Queueclas();
 };
