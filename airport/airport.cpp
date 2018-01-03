@@ -21,7 +21,7 @@ void airport::request_generation()
 	chrono::seconds minutes((rand() % 9) + 10);
 	string first[1] = { "Air" };
 	string second[4] = { "ways", "line", "india", "jet" };
-	FlightTime = (rand() % 3) + 3;
+	FlightTime = (rand() % 90) + 30;
 
 	//request time
 
