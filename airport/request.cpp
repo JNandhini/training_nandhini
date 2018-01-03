@@ -1,32 +1,21 @@
 #include "Request.h"
-#include"airport.h"
-#include<ctime>
+
 using namespace std;
+
+//assigns and return the flightid 
+
 void Request::set_flightid(int FlightId)
 {
-	
+
 	this->FlightId;
 }
 int Request::get_flightid()
 {
 	return this->FlightId;
 }
-void Request::set_flightstate(string state)
-{
-	this->state;
-}
-string Request::get_flightstate()
-{
-	return this->state;
-}
-void Request::set_flighttime(int time)
 
-	this->time;
-}
-int Request::get_flighttime()
-{
-	return this->time;
-}
+//assigns and returns the flighttime
+
 void Request::set_flightname(string FlightName)
 {
 	this->FlightName;
@@ -36,11 +25,24 @@ string Request::get_flightname()
 	return this->FlightName;
 }
 
-Request::Request()
+//assigns and returns the flightstate
+
+void Request::set_flightstate(string state)
 {
+	this->state;
+}
+string Request::get_flightstate()
+{
+	return this->state;
 }
 
-　
-Request::~Request()
+//assigns and returns the flightname
+
+void Request::set_flighttime(int FlightTime)
 {
+	this->FlightTime;
+}
+int Request::get_flighttime()
+{
+	return this->FlightTime;
 }
