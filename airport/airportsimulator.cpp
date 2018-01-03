@@ -21,7 +21,7 @@ int main()
 
 void call()
 {
-	std::chrono::minutes minute(1);
+	std::chrono::minutes minute(120);
 	std::chrono::time_point<std::chrono::system_clock>start, end;
 	start = chrono::system_clock::now();
 	std::time_t start_time = std::chrono::system_clock::to_time_t(start);
@@ -43,7 +43,7 @@ void call()
 
 void calling()
 {
-	std::chrono::minutes minute(1);
+	std::chrono::minutes minute(120);
 	std::chrono::time_point<std::chrono::system_clock>start, end;
 	start = chrono::system_clock::now();
 	std::time_t start_time = std::chrono::system_clock::to_time_t(start);
