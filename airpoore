@@ -3,9 +3,14 @@ void Airport::get_details()
 {
 cout << "Enter the Airport Name" << endl; 
 cout << "The Airport Name is" << endl;
-cin.ignore(); getline(cin, AirportName);
-cout << endl;}void Airport::request_generation()
-{  std::chrono::time_point<std::chrono::system_clock> start;
+cin.ignore();
+getline(cin, AirportName);
+cout << endl
+;
+}
+void Airport::request_generation()
+{ 
+std::chrono::time_point<std::chrono::system_clock> start;
 srand(time(0)); 
 chrono::seconds minutes((rand()%9)+10); 
 string first[1] = { "Air" }; 
@@ -14,17 +19,26 @@ string second[4] = { "ways", "line", "india", "jet" };       
         this_thread::sleep_for(chrono::seconds(request.FlightTime)); 
         start = std::chrono::system_clock::now();
         time_t StartTime = std::chrono::system_clock::to_time_t(start);
-        cout << endl << ctime(&StartTime); request.FlightId = (rand() % 9000) + 1000;
-        cout << "The flight id is" << endl; cout << request.FlightId; request.set_flightid(request.FlightId); 
+        cout << endl << ctime(&StartTime); 
+        request.FlightId = (rand() % 9000) + 1000;
+        cout << "The flight id is" << endl;
+        cout << request.FlightId; request.set_flightid(request.FlightId); 
         state1 = rand() % 2;
-        if (state1 == 0) {  request.state = "takeoff";   }
-        else {  request.state = "landing";   } 
+        if (state1 == 0)
+        {
+        request.state = "takeoff";  
+        }
+        else
+        {
+        request.state = "landing"; 
+        } 
         cout << "\nThe state of the flight is"; 
         cout << endl << request.state; request.set_flightstate(request.state);
         request.FlightName = first[rand() % 1] + second[rand() % 4];
         request.set_flightname(request.FlightName); 
         cout << "\nThe flight id " << request.FlightId << " is requesting for runnway\n";
-        cout << "The request Time is " << ctime(&StartTime); request.set_flighttime(StartTime);
+        cout << "The request Time is " << ctime(&StartTime); 
+        request.set_flighttime(StartTime);
         cout << "Time" << endl << StartTime; 
         cout << "The flightname is " << request.FlightName << endl;
         if (request.state == "landing")   
@@ -42,35 +56,28 @@ string second[4] = { "ways", "line", "india", "jet" };       
  chrono::seconds min(9); 
  std::chrono::time_point<std::chrono::system_clock>start,starttime,startdur, end;
  //start = chrono::system_clock::now();
- double ElapsedTime = 0; 
- double ElapseTime = 0;  
  if (!queue.landing.empty())
  {  
- if (runway1 == idle)  
- {
- runway1 = 1;// queue.landing[iterate].get_flightid(); 
- cout << "Runway1 is allocated to landing queue\n";// << queue.landing[iterate].get_flightid() << endl;
- iterate++;
- //queue.pop();
- queue.pop();  
- localtime(&request.now); 
- cout << "yime " << request.now;  
- start = chrono::system_clock::now();    
- std::time_t start_time = std::chrono::system_clock::to_time_t(start);
- end = chrono::system_clock::now()+min; 
- chrono::duration <double>elapse_time = start_time - StartTime; 
- cout << endl << elapse_time.count();  
- ttime = elapse_time.count();
- ElapsedTime = ttime + ElapsedTime; 
- difference = ElapsedTime; 
- cout << endl << difference;  
-        }  
+         if (runway1 == idle)  
+         {
+         runway1 = 1;// queue.landing[iterate].get_flightid(); 
+         cout << "Runway1 is allocated to landing queue\n";// << queue.landing[iterate].get_flightid() << endl;
+         iterate++;
+         //queue.pop();
+         queue.pop();  
+         localtime(&request.now); 
+         cout << "yime " << request.now;  
+         start = chrono::system_clock::now();    
+         std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+         end = chrono::system_clock::now()+min; 
+         chrono::duration <double>elapse_time = start_time - StartTime; 
+         cout << endl << elapse_time.count();  
+        }  
         else if (runway2 == idle) 
         {  
         runway2 = 1;// queue.landing[iterator].get_flightid();  
         cout << "Runway2 is allocated to landing queue";// << queue.landing[iterator].get_flightid() << endl; 
         starttime = chrono::system_clock::now();
-        //queue.display();//queue.push(request); 
         iterate++; 
         cout << iterator;  
         queue.pop();
@@ -78,11 +85,7 @@ string second[4] = { "ways", "line", "india", "jet" };       
         end = chrono::system_clock::now(); 
         std::time_t Starttime = std::chrono::system_clock::to_time_t(starttime);   
         chrono::duration <double>elapsed_time = Starttime- StartTime;
-        //cout << endl << elapsed_time.count(); 
-        ttime = elapsed_time.count();   
-        ElapsedTime = ttime + ElapsedTime; 
-        difference = ElapsedTime;   
-        cout << endl << difference;
+        cout << endl << elapsed_time.count(); 
         }
         }
 　　 else if (!queue.takeoff.empty()) 
@@ -98,10 +101,6 @@ string second[4] = { "ways", "line", "india", "jet" };       
    std::time_t start_time = std::chrono::system_clock::to_time_t(start); 
    end = chrono::system_clock::now();
    chrono::duration <double>elapse_time = start_time - StartTime;  
-   ttime = elapse_time.count();
-   ElapseTime = ttime + ElapseTime;
-   difference1 = ElapseTime;  
-   cout << endl << difference;    
    }
    }
 　　   else if (runway2 == idle)  
@@ -116,10 +115,6 @@ string second[4] = { "ways", "line", "india", "jet" };       
      end = chrono::system_clock::now();   
      chrono::duration <double>elapse_time =  Start_time- StartTime;   
      cout << endl << elapse_time.count(); 
-     ttime = elapse_time.count();  
-     ElapseTime = ttime + ElapseTime;   
-     difference1 = ElapseTime;  
-     cout << endl << difference;
      }
      }
      start = chrono::system_clock::now();  
@@ -154,19 +149,12 @@ string second[4] = { "ways", "line", "india", "jet" };       
 int main()
 {
 Airport airport;  
+airport.get_details(); 
 async(call);
 async(calling);
 airport.queue.display();
-airport.get_details(); 
-while (std::chrono::system_clock::now() < end)  
-{ 
-airport.allocation_of_runway();
- }
- while (std::chrono::system_clock::now() < end)
- {
- airport.allocation_of_runway1();
-}
-system("pause"); cin.ignore(1000,'\n');
+system("pause");
+cin.ignore(1000,'\n');
 }
 void call()
 {
@@ -177,7 +165,6 @@ std::time_t start_time = std::chrono::system_clock::to_time_t(start);
 cout << ctime(&start_time); 
 end = std::chrono::system_clock::now() + minute; 
 std::time_t end_time = std::chrono::system_clock::to_time_t(end);
- cout << "hai0"; 
  while (std::chrono::system_clock::now() < end)
  {
  airport.request_generation();
