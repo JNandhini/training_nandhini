@@ -22,11 +22,11 @@ string first[1] = { "Air" }; 
 string second[4] = { "ways", "line", "india", "jet" };        
         FlightTime=(rand()%9)+10;
         
-        //request time
+        //request start time 
         
         start = std::chrono::system_clock::now();
         time_t StartTime = std::chrono::system_clock::to_time_t(start);
-        cout << endl << ctime(&StartTime); 
+        cout << endl <<"The Start time is"<< ctime(&StartTime); 
         request.FlightId = (rand() % 9000) + 1000;
         request.FlightTime=StartTime;
         cout << "The flight id is" << endl;
