@@ -19,8 +19,8 @@ string Request::get_flightstate()
 {
 	return this->state;
 }
-void Request::set_flighttime(time_t time)
-{
+void Request::set_flighttime(int time)
+
 	this->time;
 }
 int Request::get_flighttime()
