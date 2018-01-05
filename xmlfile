@@ -1,0 +1,29 @@
+<music_player>           <songs> 
+<song id="song1">      
+<song_name>       
+</song_name>  
+<artists id="artist1 artist2"/>   
+<album id ="album1">     
+</album> </song>
+ <song id="song2">       
+ <song_name>       
+ </song_name>        
+ <artists>     
+ <artist id="artist1"/>            
+ </artists>             <albums id="album1"/>   
+ </song>     </songs>
+     <artists>
+        <artist id="artist1">       
+        <artist_name>             
+        </artist_name>          
+        <song id="song1 song2" />       
+        </artist>
+        <artist id="artist2">           
+        <artist_name>
+        </artist_name>         
+        <artist id="song1"/>       
+        </artist> 
+        </artists>         
+        <albums> <album id="album1">      <album_name>           </album_name>      <song_list>          <song id="song1 song2"/>                           </song_list>           <album_year>            </album_year> </album> <album id="album2">    <album_name>           </album_name>      <song_list>          <song id="song1"/>                           </song_list>           <album_year>            </album_year> </album>     </albums>
+ <playlists>      <playlist_name>            </playlist_name>      <song id="song1 song2"/>      </playlists>
+</music_player>
