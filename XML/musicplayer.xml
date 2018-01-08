@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<music_player>
+      
+ <songs>
+	<song id="song1">
+       <song_name> song1
+ 	     </song_name>
+ 	     <artists id="artist1 artist2"/>
+ 	     <album id ="album1">
+ 	     </album>
+	</song>
+
+	<song id="song2">
+       <song_name>  song2   
+   	   </song_name>
+       <artist id="artist1"/>   
+       <albums id="album1"/>
+       </song>
+   
+
+  <song id="song3">
+       <song_name> song3
+ 	     </song_name>
+ 	     <artists id="artist3"/>
+ 	     <album id ="album2">
+ 	     </album>
+  </song>
+  <song id="song4">
+       <song_name> song4
+ 	     </song_name>
+ 	     <artists id="artist2 artist3"/>
+ 	     <album id ="album2">
+ 	     </album>
+	</song>
+  <song id="song5">
+       <song_name> song5
+ 	     </song_name>
+ 	     <artists id="artist4 artist2"/>
+ 	     <album id ="album3"/>
+ 	    
+	</song>
+  <song id="song6">
+       <song_name> song6
+ 	     </song_name>
+ 	     <artists id="artist4"/>
+ 	     <album id ="album2"/>
+ 	    
+	</song>
+</songs>
+
+ <artists>
+
+  <artist id="artist1">
+       <artist_name>   artistname1
+       </artist_name>
+       <song id="song1 song2"/>
+  </artist>
+
+  <artist id="artist2">
+        <artist_name> artistname2
+        </artist_name>
+        <song id="song1 song4 song5"/>
+  </artist>
+ 
+  <artist id="artist3">
+       <artist_name> artistname3
+       </artist_name>
+       <song id="song3 song4"/>
+  </artist>
+  <artist id="artist4">
+       <artist_name> artistname4
+       </artist_name>
+       <song id="song5 song6"/>
+  </artist>
+ </artists>
+ <albums>
+	    <album id="album1">
+  	    <album_name>album1</album_name>
+  	    <song id="song1 song2"/>
+        <album_year> 1990  </album_year>
+	    </album>
+      <album id="album2">
+	       <album_name>album2</album_name>
+  	     <song id="song3 song4 song6"/>
+         <album_year>1980  </album_year>
+      </album>
+      <album id="album3">
+  	     <album_name>album</album_name>
+  	     <song id="song5"/>
+         <album_year>1989  </album_year>
+	    </album>
+    <compliation_album id="compliation1" >
+      <compilation_album_name>compilation album name1</compilation_album_name>
+      <song id="song1 song2 song6"/>
+    </compliation_album>
+ </albums>
+
+ <playlists>
+    <playlist>
+      <playlist_name> playlist1 </playlist_name>
+  	  <song id="song1 song2 song3 song4"/>
+    </playlist>
+    <playlist>	   
+  	  <playlist_name> playlist2 </playlist_name>
+      <song id="song1 song2 song5 song6"/>
+ </playlist>
+  	   
+	</playlists>
+
+　
+</music_player>
