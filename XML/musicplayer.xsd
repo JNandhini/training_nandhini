@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="muiscplayer"
+    targetNamespace="http://tempuri.org/muiscplayer.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/muiscplayer.xsd"
+    xmlns:mstns="http://tempuri.org/muiscplayer.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="musicplayer"  type="collections"/>
+    <xs:complexType name="collections">
+      <xs:sequence> 
+        <xs:element name="songs" type="music"/>
+         <xs:element name="artists" type="singer"/>
+          <xs:element name="albums"  type="films"/>
+           <xs:element name="playlists" type="list"/>
+      </xs:sequence>
+    </xs:complexType>
+  <xs:complexType name="music">
+    <xs:sequence>
+      <xs:element name="song" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="artist">
+              <xs:complexType>
+                <xs:attribute name="id" type="xs:IDREFS"/>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="album">
+              <xs:complexType>
+                <xs:attribute name="id" type="xs:IDREF"/>
+              </xs:complexType>
+            </xs:element>
+                <xs:element name="song_name" type="xs:string"/>
+          </xs:sequence>
+              <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+       </xs:element>
+    </xs:sequence>
+  </xs:complexType>  
+  <xs:complexType name="singer">
+    <xs:sequence>
+      <xs:element name="artist" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="artist_name" type="xs:string"/>
+            <xs:element name="song">
+              <xs:complexType>
+                <xs:attribute name="id" type="xs:IDREFS"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+      </xs:element>
+      </xs:sequence>
+  </xs:complexType>
+
+<xs:complexType name="films">
+  <xs:sequence>
+    <xs:element name="album" minOccurs="0" maxOccurs="unbounded">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="album_name" type="xs:string"/>
+          <xs:element name="song">
+            <xs:complexType>
+              <xs:attribute name="id" type="xs:IDREFS"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="album_year" type="xs:date"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+      </xs:complexType>
+    </xs:element>
+  <xs:element name="compilation_album">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:ID"/>
+    </xs:complexType>
+  </xs:element>
+   <xs:element name="song">
+    <xs:complexType>
+       <xs:attribute name="id" type="xs:IDREFS"/>
+    </xs:complexType>
+   </xs:element>
+    <xs:element name="compilation_album_name" type="xs:string"/>
+ </xs:sequence>
+</xs:complexType>
+
+  <xs:complexType name="list">
+    <xs:sequence>
+      <xs:element name="playlist" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="playlist_name" type="xs:string"/>
+             <xs:element name="song">
+              <xs:complexType>
+                <xs:attribute name="id" type="xs:IDREFS"/>
+              </xs:complexType>
+            </xs:element>
+           </xs:sequence>
+         </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
