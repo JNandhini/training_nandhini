@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE[
+<!DOCTYPE musicplayer[
 <!ELEMENT musicplayer  (songs,artists,albums,playlists)>
-<!ELEMENT songs (song*)>
+<!ELEMENT songs (song)*>
 <!ATTLIST song id ID #REQUIRED>
 <!ELEMENT song (song_name,artist,album)>
 <!ATTLIST artist id IDREFS #REQUIRED>
 <!ATTLIST album id IDREF #IMPLIED>
 <!ELEMENT song_name (#PCDATA)>
 
-<!ELEMENT artists (artist*)>
+<!ELEMENT artists (artist)*>
 <!ATTLIST artist id ID #REQUIRED>
 <!ELEMENT artist (artist_name,song)>
 <!ATTLIST song id IDREFS #REQUIRED>
@@ -25,7 +25,7 @@
 <!ATTLIST song id IDREFS #REQUIRED>
 <!ELEMENT compilation_album_name (#PCDATA)>
 
-<!ELEMENT playlists (playlist*)>
+<!ELEMENT playlists (playlist)*>
 <!ELEMENT playlist (playlist_name)>
 <!ATTLIST song id IDREFS #REQUIRED>
 <!ELEMENT playlist_name (#PCDATA)>
