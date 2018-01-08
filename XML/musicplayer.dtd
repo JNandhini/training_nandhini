@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE musicplayer[
+<!DOCTYPE musicplayer<
 <!ELEMENT musicplayer  (songs,artists,albums,playlists)>
 <!ELEMENT songs (song)*>
 <!ATTLIST song id ID #REQUIRED>
