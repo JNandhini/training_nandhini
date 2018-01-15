@@ -1,0 +1,209 @@
+#include<iostream>
+#include<string>
+int choice=0;
+string id=0;
+void insert_songs()
+{
+DOMElement* Root = document->getDocumentElement();
+DOMElement* Element = document->createElement(L"songs");
+Root->appendChild(Element);
+DOMElement* element = document->createElement(L"song");
+Element->appendChild(element);
+DOMElement* Artist = document->createElement(L"artist");
+element->appendChild(Artist);
+Artist->setAttribute(L"id", L"song7");
+element->setAttribute(L"id", L"artist1 artist6");
+DOMElement* Album = document->createElement(L"album");
+element->appendChild(Album);
+Album->setAttribute(L"id", L"album1 album3");
+DOMElement* SongNameElement = document->createElement(L"song_name");
+element->appendChild(SongNameElement);
+DOMText* SongText = document->createTextNode(L"song7");
+SongNameElement->appendChild(SongText);
+}
+void insert_artist()
+{
+DOMElement* ArtistElement = document->createElement(L"artists");
+Root->appendChild(ArtistElement);
+DOMElement* newartist = document->createElement(L"artist");
+ArtistElement->appendChild(newartist);
+newartist->setAttribute(L"id", L"artist6");
+DOMElement* ArtistNameElement = document->createElement(L"artist_name");
+newartist->appendChild(ArtistNameElement);
+DOMText* ArtistText = document->createTextNode(L"artist6");
+ArtistNameElement->appendChild(ArtistText);
+DOMElement* Songs = document->createElement(L"song");
+ArtistElement->appendChild(Songs);
+Songs->setAttribute(L"id", L"song7 song3");
+
+}
+void insert_album()
+{
+DOMElement* AlbumElement = document->createElement(L"albums");
+Root->appendChild(AlbumElement);
+DOMElement* newalbum = document->createElement(L"album");
+AlbumElement->appendChild(newalbum);
+newalbum->setAttribute(L"id", L"album6");
+DOMElement* AlbumNameElement = document->createElement(L"artist_name");
+newalbum->appendChild(AlbumNameElement);
+DOMText* AlbumText = document->createTextNode(L"artist6");
+AlbumNameElement->appendChild(AlbumText);
+DOMElement* AlbumSong= document->createElement(L"song");
+AlbumElement->appendChild(AlbumSong);
+AlbumSong->setAttribute(L"id", L"song3 song2");
+DOMElement* AlbumYearElement = document->createElement(L"album_year");
+newalbum->appendChild(AlbumYearElement);
+DOMText* AlbumYear = document->createTextNode(L"artist6");
+AlbumYearElement->appendChild(AlbumYear);
+}
+void insert_playlist()
+{
+DOMElement* Playlist = document->createElement(L"playlists");
+Root->appendChild(Playlist);
+DOMElement* PlaylistElement = document->createElement(L"playlist");
+Playlist->appendChild(PlaylistElement);
+DOMElement* PlaylistNameElement = document->createElement(L"playlist_name");
+PlaylistElement->appendChild(PlaylistNameElement);
+DOMText* PlaylistName = document->createTextNode(L"playlist3");
+PlaylistNameElement->appendChild(PlaylistName);
+DOMElement* PlaylistSong = document->createElement(L"song");
+PlaylistElement->appendChild(PlaylistSong);
+PLaylistSon ->setAttribute(L"id", L"song1 song3 song7");
+}
+cout<<"\nEnter the artist id";
+cin>>artist_id;
+cout<<"\nEnter the artist name";
+cin.ignore();
+getline(cin,artist_name);
+cout<<"\nEnter the album id";
+cin>>album_id;
+cout<<"\nEnter the album name";
+cin.ignore();
+getline(cin,album_name);
+cout<<"Enter the album year";
+cin>>album_year;
+cout<<"Enter the compilation id";
+cin>>compialtion_id;
+cout<<"\nEnter the compilation name";
+cin.ignore();
+getline(cin,compilation_name);
+cout<<"Enter the playlist name";
+cin.ignore();
+getline(cin,playlist_name);
+}
+void display(){
+
+
+if (document) {
+    cout<<"XML OK"<<endl;
+
+    DOMElement* elementRoot = document->getDocumentElement();
+    string TagName(XMLString::transcode(elementRoot->getTagName()));
+    cout<<"name tag elt root:"<<TagName<<endl;
+
+    DOMElement* firstChild= elementRoot->getFirstElementChild();
+    string Child(XMLString::transcode(firstChild->getNodeName()));
+    cout<<"first child:"<<Child<<endl;
+
+    // child element
+    const XMLSize_t count = elementRoot->getChildElementCount();
+    cout<<"number of child Elements for "<<TagName<<":"<<count<<endl;
+
+    // child node
+    DOMNodeList* nodeList = elementRoot->getChildNodes();
+    XMLSize_t sizeList =nodeList->getLength();
+    cout<<"number child nodes for "<<TagName<<":"<<sizeList<<endl;
+
+    for(XMLSize_t size = 0; size < sizeList; ++size){
+        cout<<endl<<"!!!! reading node:"<<size<<endl;
+
+        // get node
+        DOMNode* currentNode = nodeList->item(size);
+
+        // name
+        string name(XMLString::transcode(currentNode->getNodeName()));
+        cout<<"name:"<<name<<endl;
+
+        // type
+        cout<<"type:"<<currentNode->getNodeType()<<endl;
+        if (currentNode->getNodeType() == DOMNode::TEXT_NODE) {
+            DOMText* currentText = dynamic_cast< xercesc::DOMText* >(currentNode);
+            string text(XMLString::transcode(currentText->getWholeText()));
+            cout<<"text:"<<text<<endl;
+        }
+
+        // parent
+        DOMNode* parent = currentNode->getParentNode();
+        string nameParent(XMLString::transcode(parent->getNodeName()));
+        cout<<"nameParent:"<<nameParent<<endl;
+
+        // has attributes
+        bool hasAttributes = currentNode->hasAttributes();
+        cout<<"hasAttributes:"<<hasAttributes<<endl;
+        if (hasAttributes) {
+            cout<<"*** Reading attributes"<<endl;
+            DOMNamedNodeMap* Map = currentNode->getAttributes();
+            XMLSize_t sizeAtt Map->getLength();
+            cout<<"\tnumber of attributes: "<<sizeAtt<<endl;
+            for(XMLSize_t iterate = 0; iterate < sizeAtt; ++iterate){
+                DOMNode* Node = Map->item(iterate );
+                cout<<"\tattribute node type:"<<Node->getNodeType()<<endl;
+                string AttributeName(XMLString::transcode(Node->getNodeName()));
+                string AttributeValue(XMLString::transcode(Node->getNodeValue()));
+                cout<<"\tattribute name:"<<AttributeName<<";
+		cout<<value:"<<AttributeValue<<endl;
+            }
+        }
+
+      
+    }
+}
+else {
+    cout<<"XML NOK"<<endl;
+}
+void search_by_song()
+{
+cout<<"Enter the song name";
+cin.ignore();
+getline(cin,SongName);
+}
+void search_by_artist()
+{
+cout<<"\nEnter the artist name";
+cin.ignore();
+getline(cin,ArtistName);
+}
+void serach_by_album()
+{
+cout<<"\nEnter the album name";
+cin.ignore();
+getline(cin,AlbumName);
+}
+while(1)
+{
+cout<<"Enter the choice"<<endl;
+cin>>choice;
+cout<<"a.Insert the values\nb.Searching by songs\nc.searching by artists\nd.Search by album\n"<<endl;
+if(choice=='a'||choice=='b'||choice=='c'||choice=='d')
+{
+switch(choice)
+{
+case 'a':
+music->insert_song();
+music->insert_artist();
+music->insert_album();
+music>insert_playlist();
+case 'b':
+music->search_by_song();
+case 'c':
+music->search_by_artist();
+case 'd':
+music->search_by_album();
+}
+}
+else
+{
+cout<<"\nInvalid input";
+} 
+
+
