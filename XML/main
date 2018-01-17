@@ -5,15 +5,16 @@
 int main()
 {
 	musicplayer * music = new musicplayer("./musicplayer.xml");
-	music->insert_songs();
-	music->insert_artist();
-	music->insert_album();
-	music->insert_playlist();
-	music->display_songs();
-	music->display_artist();
-	music->display_album();
-	music->display_playlist();
-	system("pause");
+	char choice;
+     music->insert_songs();
+	 music->insert_artist();
+	 music->insert_album();
+	 music->insert_playlist();
+	 music->display_songs();
+	 music->display_artist();
+	 music->display_album();
+	 music->display_compilation_album();
+	 music->display_playlist();
+	 system("pause");
 
-　
 }
