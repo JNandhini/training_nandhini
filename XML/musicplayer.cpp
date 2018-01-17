@@ -103,23 +103,45 @@ XMLPlatformUtils::Initialize();
 
 	  void musicplayer::insert_songs()
 	  {
-		 
-		  DOMElement* Root = document->getDocumentElement();
-		  DOMElement* Element = document->createElement(L"songs");
-		  Root->appendChild(Element);
+		  wstring SongName;
+		  wstring id;
+		  wstring ArtistId;
+		  wstring AlbumId;
+		  const wchar_t* song;
+		  const wchar_t* idrefs;	
+		  XMLCh* tag = XMLString::transcode("songs");
+		  DOMNodeList* list = document->getElementsByTagName(tag);
+		  XMLString::release(&tag);
+		  DOMElement* Root = dynamic_cast<DOMElement*>(list->item(0));
 		  DOMElement* element = document->createElement(L"song");
-		  Element->appendChild(element);
-		  element->setAttribute(L"id", L"song7");
+		  Root->appendChild(element);
+		  cout << "Enter the song id";
+		  wcin >> id;
+		  song = id.c_str();
+		  element->setAttribute(L"id",song);
 		  DOMElement* SongNameElement = document->createElement(L"song_name");
 		  element->appendChild(SongNameElement);
-		  DOMText* SongText = document->createTextNode(L"Konjam un");
+		  cout << "Enter the songaname";
+		  wcin >> SongName;
+		  song = SongName.c_str();
+		  DOMText* SongText = document->createTextNode(song);
 		  SongNameElement->appendChild(SongText);
 		  DOMElement* Artist = document->createElement(L"artistid");
 		  element->appendChild(Artist);
-		  Artist->setAttribute(L"id", L"artist1 artist3");
+		  cout << "Enter the artistid";
+		  wcin >> ArtistId;
+		  cout << "Enter the artistid";
+		  wcin >> ArtistId;
+		  song = ArtistId.c_str();
+		  idrefs = ArtistId.c_str();
+		  Artist->setAttribute(L"id", song);
+		  Artist->setAttribute(L"id", idrefs);
 		  DOMElement* Album = document->createElement(L"albumid");
 		  element->appendChild(Album);
-		  Album->setAttribute(L"id", L"album1");
+		  cout << "Enter the songaname";
+		  wcin >> AlbumId;
+		  song = AlbumId.c_str();
+		  Album->setAttribute(L"id", song);
 		  reading_xmlfile(document, "./musicplayer.xml");
 		 
 	  }
@@ -128,19 +150,39 @@ XMLPlatformUtils::Initialize();
 
 	  void musicplayer:: insert_artist()
 	  {
-		  DOMElement* Root = document->getDocumentElement();
-		  DOMElement* ArtistElement = document->createElement(L"artists");
-		  Root->appendChild(ArtistElement);
+		  wstring ArtistName;
+		  wstring Artistid;
+		  wstring SongId;
+		  const wchar_t*	artist;
+		  const wchar_t* idrefs;
+		  XMLCh* tag = XMLString::transcode("artists");
+		  DOMNodeList* list = document->getElementsByTagName(tag);
+		  XMLString::release(&tag);
+		  DOMElement* root = dynamic_cast<DOMElement*>(list->item(0));
 		  DOMElement* newartist = document->createElement(L"artist");
-		  ArtistElement->appendChild(newartist);
-		  newartist->setAttribute(L"id", L"artist5");
+		  root->appendChild(newartist);
+		  cout << "Enter the artist id";
+		  wcin >> Artistid;
+		  artist = Artistid.c_str();
+		  newartist->setAttribute(L"id", artist);
 		  DOMElement* ArtistNameElement = document->createElement(L"artist_name");
 		  newartist->appendChild(ArtistNameElement);
-		  DOMText* ArtistText = document->createTextNode(L"Aslam");
+		  cout << "Enter the artist name";
+		  wcin >> ArtistName;
+		  artist = ArtistName.c_str();
+		  DOMText* ArtistText = document->createTextNode(artist);
 		  ArtistNameElement->appendChild(ArtistText);
 		  DOMElement* Songs = document->createElement(L"songID");
 		  newartist->appendChild(Songs);
-		  Songs->setAttribute(L"id", L"song7 song3");
+		  cout << "Enter the song id";
+		  wcin >>SongId;
+		  artist = SongId.c_str();
+		  cout << "Enter the song id";
+		  wcin >> SongId;
+		  artist = SongId.c_str();
+		  Songs->setAttribute(L"id", artist);
+		  Songs->setAttribute(L"id", artist);
+		
 		  reading_xmlfile(document, "./musicplayer.xml");
 
 	  }
@@ -149,22 +191,41 @@ XMLPlatformUtils::Initialize();
 
 	  void musicplayer::insert_album()
 	  {  
-		  DOMElement* Root = document->getDocumentElement();
-		  DOMElement* AlbumElement = document->createElement(L"albums");
-		  Root->appendChild(AlbumElement);
+		  wstring AlbumName;
+		  wstring Albumid;
+		  wstring SongId;
+		  wstring year;
+		  const wchar_t* album;
+		  const wchar_t* idrefs;
+		  XMLCh* tag = XMLString::transcode("albums");
+		  DOMNodeList* list = document->getElementsByTagName(tag);
+		  XMLString::release(&tag);
+		  DOMElement* Root = dynamic_cast<DOMElement*>(list->item(0));
 		  DOMElement* newalbum = document->createElement(L"album");
-		  AlbumElement->appendChild(newalbum);
-		  newalbum->setAttribute(L"id", L"album4");
+		  Root->appendChild(newalbum);
+		  cout << "Enter the album id";
+		  wcin >> Albumid;
+		  album = Albumid.c_str();
+		  newalbum->setAttribute(L"id", album);
 		  DOMElement* AlbumNameElement = document->createElement(L"album_name");
 		  newalbum->appendChild(AlbumNameElement);
-		  DOMText* AlbumText = document->createTextNode(L"M.S.Dhoni");
+		  cout << "Enter the album name";
+		  wcin >> AlbumName;
+		  album = AlbumName.c_str();
+		  DOMText* AlbumText = document->createTextNode(album);
 		  AlbumNameElement->appendChild(AlbumText);
 		  DOMElement* AlbumSong = document->createElement(L"songid");
 		  newalbum->appendChild(AlbumSong);
-		  AlbumSong->setAttribute(L"id", L"song3 song2");
+		  cout << "Enter the song id";
+		  wcin >> SongId;
+		  album = SongId.c_str();
+		  AlbumSong->setAttribute(L"id", album);
 		  DOMElement* AlbumYearElement = document->createElement(L"album_year");
 		  newalbum->appendChild(AlbumYearElement);
-		  DOMNode* AlbumYear = document->createTextNode(L"1992");
+		  cout << "Enter the album year";
+		  wcin >> year;
+		  album = year.c_str();
+		  DOMNode* AlbumYear = document->createTextNode(album);
 		  AlbumYearElement->appendChild(AlbumYear);
 		  reading_xmlfile(document, "./musicplayer.xml");
 	  }
@@ -173,18 +234,33 @@ XMLPlatformUtils::Initialize();
 
 	  void musicplayer::insert_playlist()
 	  {
-		  DOMElement* Root = document->getDocumentElement();
-		  DOMElement* Playlist = document->createElement(L"playlists");
-		  Root->appendChild(Playlist);
+		  wstring name;
+		  wstring SongId;
+		  const wchar_t* playlist;
+		  const wchar_t* idrefs;
+		  XMLCh* tag = XMLString::transcode("playlists");
+		  DOMNodeList* list = document->getElementsByTagName(tag);
+		  XMLString::release(&tag);
+		  DOMElement* Root = dynamic_cast<DOMElement*>(list->item(0));
 		  DOMElement* PlaylistElement = document->createElement(L"playlist");
-		  Playlist->appendChild(PlaylistElement);
+		  Root->appendChild(PlaylistElement);
+		  cout << "Enter the playlist name";
+		  wcin >> name;
+		  playlist = name.c_str();
 		  DOMElement* PlaylistNameElement = document->createElement(L"playlist_name");
 		  PlaylistElement->appendChild(PlaylistNameElement);
-		  DOMText* PlaylistName = document->createTextNode(L"playlist3");
+		  DOMText* PlaylistName = document->createTextNode(playlist);
 		  PlaylistNameElement->appendChild(PlaylistName);
 		  DOMElement* PlaylistSong = document->createElement(L"song");
 		  PlaylistElement->appendChild(PlaylistSong);
-		  PlaylistSong->setAttribute(L"id", L"song1 song3 song7");
+		  cout << "Enter the song id";
+		  wcin >> SongId;
+		  playlist = SongId.c_str();
+		  PlaylistSong->setAttribute(L"id", playlist);
+		  cout << "Enter the song id";
+		  wcin >> SongId;
+		  idrefs = SongId.c_str();
+		  PlaylistSong->setAttribute(L"id", idrefs);
 
 		  //calls the reading xml file to modify it by inserting
 
@@ -220,10 +296,7 @@ XMLPlatformUtils::Initialize();
 
 	  void musicplayer::display_songs()
 	  {
-		  string name;
-		  string id;
-		  string idrefs;
-		  string idref;
+		 
 		  for (int count = 0; count < get_count("songs", 0, "song"); count++)
 		  {
 			  cout << "\nThe songs are";
@@ -235,34 +308,17 @@ XMLPlatformUtils::Initialize();
 			  cout << "Artists name " << idrefs.c_str() << endl;
 			  idref = get_attribute("songs", 0, "albumid", count, "id");
 			  cout << "album name " << idref.c_str() << endl;
+			//  display_after_inserting_songs();
 
 		  }
-
-　
-		  for (int count = 0; count < get_count("songs", 1, "song"); count++)
-		  {
-
-			  cout << "\nThe songs are";
-			  id = get_attribute("songs", 1, "song", count, "id");
-			  cout << "\nSong id is " << id.c_str() << endl;
-			  name = get_value("songs", 1, "song_name", 0);
-			  cout << "Song name is " << name.c_str() << endl;
-			  idrefs = get_attribute("songs", 1, "artistid", count, "id");
-			  cout << "Artists name " << idrefs.c_str() << endl;
-			  idref = get_attribute("songs", 1, "albumid", count, "id");
-			  cout << "album name " << idref.c_str() << endl;
-
-　
-		  }
-		 
 	  }
 
+　
 	  //displays the artist
 
 	  void musicplayer::display_artist()
 	  {
-		  string name;
-		  string id;
+		
 		  for (int count = 0; count <get_count("artists", 0, "artist"); count++)
 		  {
 			  cout << "\nThe artists are";
@@ -274,25 +330,14 @@ XMLPlatformUtils::Initialize();
 			  cout << "Songs are " << id.c_str() << endl;
 
 		  }
-		  for (int count = 0; count < get_count("artists", 1, "artist"); count++)
-		  {
-			  cout << "\nThe artists are";
-			  id = get_attribute("artists", 1, "artist", count, "id");
-			  cout << "\nArtist id is " << id.c_str() << endl;
-			  name = get_value("artists", 1, "artist_name", 0);
-			  cout << "Artist name is " << name.c_str() << endl;
-			  id = get_attribute("artists", 1, "songID", count, "id");
-			  cout << "Songs are " << id.c_str() << endl;
-		  }
 	  }
 
-　
+	 
 	  //displays the album
 
 	  void musicplayer::display_album()
 	  {
-		  string name;
-		  string id;
+		 
 		  string year;
 		  for (int count = 0; count < get_count("albums", 0, "album"); count++)
 		  {
@@ -306,29 +351,16 @@ XMLPlatformUtils::Initialize();
 			  year = get_value("album", count, "album_year", 0);
 			  cout << "Album year " << year.c_str() << endl;
 		  }
-		  for (int count = 0; count < get_count("albums", 1, "album"); count++)
-		  {
-			  cout << "\nThe albums are";
-			  id = get_attribute("albums", 1, "album", count, "id");
-			  cout << "\nAlbum id " << id.c_str() << endl;
-			  name = get_value("albums", 1, "album_name", 0);
-			  cout << "Album name is " << name.c_str() << endl;
-			  id = get_attribute("albums", 1, "songid", count, "id");
-			  cout << "The songs are " << id.c_str() << endl;
-			  year = get_value("albums", 1, "album_year", 0);
-			  cout << "Album year " << year.c_str() << endl;
-		  }
-
 	  }
-
+		 
+	 
 	  //display the compilation album
 
 	  void musicplayer::display_compilation_album()
 	  {
-		  string name;
-		  string id;
+		
 		  int count = 0;
-		  id = get_attribute("albums", 1, "compilation_album", 1, "Id");
+		  id = get_attribute("albums", 0, "compilation_album", 0, "Id");
 		  cout << " \nCompilation album id " << id.c_str() << endl;
 		  name = get_value("albums", 0, "compilation_album_name", 0);
 		  cout << "Compilation album name is " << name.c_str() << endl;
@@ -346,17 +378,10 @@ XMLPlatformUtils::Initialize();
 		  for (int count = 0; count < get_count("playlists", 0, "playlist"); count++)
 		  {
 			  cout << "\nThe playlists are";
-			  name= get_value("playlist", count, "playlist_name", 0);
+			  name = get_value("playlist", count, "playlist_name", 0);
 			  cout << "\nPlaylist name " << name.c_str() << endl;
 			  id = get_attribute("playlists", 0, "song", count, "id");
 			  cout << "Songs in the playlist are " << id.c_str() << endl;
 		  }
-		  for (int count = 0; count < get_count("playlists", 1, "playlist"); count++)
-		  {
-			  cout << "\nThe playlists are";
-			  name = get_value("playlists", 1, "playlist_name", 0);
-			  cout << "\nPlaylist name " << name.c_str() << endl;
-			  id = get_attribute("playlists", 1, "song", count, "id");
-			  cout << "Songs in the playlist are " << id.c_str() << endl;
-		  }
 	  }
+	 
