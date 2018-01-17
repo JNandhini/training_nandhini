@@ -20,19 +20,20 @@
       <xs:element name="song" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="artist">
+            <xs:element name="artistid">
               <xs:complexType>
                 <xs:attribute name="id" type="xs:IDREFS"/>
               </xs:complexType>
             </xs:element>
-            <xs:element name="album">
+            <xs:element name="albumid">
               <xs:complexType>
                 <xs:attribute name="id" type="xs:IDREF"/>
               </xs:complexType>
             </xs:element>
-                <xs:element name="song_name" type="xs:string"/>
+
+            <xs:element name="song_name" type="xs:string"/>
           </xs:sequence>
-              <xs:attribute name="id" type="xs:ID"/>
+          <xs:attribute name="id" type="xs:ID"/>
         </xs:complexType>
        </xs:element>
     </xs:sequence>
@@ -43,7 +44,7 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="artist_name" type="xs:string"/>
-            <xs:element name="song">
+            <xs:element name="songID">
               <xs:complexType>
                 <xs:attribute name="id" type="xs:IDREFS"/>
               </xs:complexType>
@@ -61,7 +62,7 @@
       <xs:complexType>
         <xs:sequence>
           <xs:element name="album_name" type="xs:string"/>
-          <xs:element name="song">
+          <xs:element name="songId">
             <xs:complexType>
               <xs:attribute name="id" type="xs:IDREFS"/>
             </xs:complexType>
