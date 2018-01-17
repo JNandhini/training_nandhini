@@ -27,6 +27,12 @@ class musicplayer
 	DOMDocument* document;
 	DOMImplementation* implement;
 public:
+	string name;
+	string id;
+	string idrefs;
+	string idref;
+	int value;
+public:
 
 	musicplayer(const char *file);
 	~musicplayer();
