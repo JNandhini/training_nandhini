@@ -1,99 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <music_player>
       
  <songs>
-	<song id="song1">
-       <song_name> song1
- 	     </song_name>
- 	     <artists id="artist1 artist2"/>
- 	     <album id ="album1">
- 	     </album>
+	  <song id="song1">
+       <song_name> Vinayagane </song_name>
+ 	     <artistid id="artist1 artist2"/>
+ 	     <albumid id="album1"/>
+     
 	</song>
 
-	<song id="song2">
-       <song_name>  song2   
-   	   </song_name>
-       <artist id="artist1"/>   
-       <albums id="album1"/>
-       </song>
+	  <song id="song2">
+      <song_name> Kantha potri </song_name>
+      <artistid id="artist1 artist3"/>
+      <albumid id="album1"/>
    
-
-  <song id="song3">
-       <song_name> song3
- 	     </song_name>
- 	     <artists id="artist3"/>
- 	     <album id ="album2">
- 	     </album>
   </song>
-  <song id="song4">
-       <song_name> song4
- 	     </song_name>
- 	     <artists id="artist2 artist3"/>
- 	     <album id ="album2">
- 	     </album>
+
+　
+　
+    <song id="song3">
+       <song_name> Ival dhaana </song_name>
+ 	     <artistid id="artist1 artist3"/>
+ 	     <albumid id="album2"/>
+
+  </song>
+    <song id="song4">
+       <song_name> En uyire </song_name>
+ 	     <artistid id="artist2 artist3"/>
+ 	     <albumid id="album4"/>
+ 	     
 	</song>
-  <song id="song5">
-       <song_name> song5
- 	     </song_name>
- 	     <artists id="artist4 artist2"/>
- 	     <album id ="album3"/>
+    <song id="song5">
+       <song_name> Adada adada </song_name>
+ 	     <artistid id="artist4 artist2"/>
+ 	     <albumid id="album3"/>
  	    
 	</song>
-  <song id="song6">
-       <song_name> song6
- 	     </song_name>
- 	     <artists id="artist4"/>
- 	     <album id ="album2"/>
+    <song id="song6">
+       <song_name> malare ninne </song_name>
+ 	     <artistid id="artist4"/>
+ 	     <albumid id="album2"/>
  	    
 	</song>
 </songs>
 
  <artists>
 
-  <artist id="artist1">
-       <artist_name>   artistname1
-       </artist_name>
-       <song id="song1 song2"/>
+    <artist id="artist1">
+       <artist_name>   A.R.Rehman  </artist_name>
+       <songID id="song1 song2"/>
   </artist>
 
-  <artist id="artist2">
-        <artist_name> artistname2
-        </artist_name>
-        <song id="song1 song4 song5"/>
+    <artist id="artist2">
+        <artist_name> Karthi </artist_name>
+        <songID id="song1 song4 song5"/>
   </artist>
  
-  <artist id="artist3">
-       <artist_name> artistname3
-       </artist_name>
-       <song id="song3 song4"/>
+    <artist id="artist3">
+       <artist_name> Harish </artist_name>
+       <songID id="song3 song4"/>
   </artist>
-  <artist id="artist4">
-       <artist_name> artistname4
-       </artist_name>
-       <song id="song5 song6"/>
+    <artist id="artist4">
+       <artist_name> Sreenivas </artist_name>
+       <songID id="song5 song6"/>
   </artist>
  </artists>
- <albums>
-	    <album id="album1">
-  	    <album_name>album1</album_name>
-  	    <song id="song1 song2"/>
-        <album_year> 1990  </album_year>
-	    </album>
-      <album id="album2">
-	       <album_name>album2</album_name>
-  	     <song id="song3 song4 song6"/>
-         <album_year>1980  </album_year>
-      </album>
-      <album id="album3">
-  	     <album_name>album</album_name>
-  	     <song id="song5"/>
-         <album_year>1989  </album_year>
-	    </album>
-    <compliation_album id="compliation1" >
-      <compilation_album_name>compilation album name1</compilation_album_name>
-      <song id="song1 song2 song6"/>
+  <albums>
+    <album id="album1">
+      <album_name>Devotional</album_name>
+      <songid id="song1 song2"/>
+      <album_year> 1990  </album_year>
+    </album>
+    <album id="album2">
+      <album_name>Kandha</album_name>
+      <songid id="song3 song4 song6"/>
+      <album_year>1980  </album_year>
+    </album>
+    <album id="album3">
+      <album_name>Hitsongs</album_name>
+      <songid id="song5"/>
+      <album_year>1989  </album_year>
+    </album>
+    <compliation_album Id="compliation1">
+      <compilation_album_name>Top 10 songs</compilation_album_name>
+      <songId id="song1 song2 "/>
     </compliation_album>
- </albums>
+    </albums>
+  
+   
 
  <playlists>
     <playlist>
@@ -106,6 +100,39 @@
  </playlist>
   	   
 	</playlists>
+  
+  
 
 　
+  <songs>
+    <song id="song7">
+      <song_name>Konjam un</song_name>
+      <artistid id="artist1 artist3"/>
+      <albumid id="album3"/>
+    </song>
+  </songs>
+
+  <artists>
+    <artist id="artist5">
+      <artist_name>Aslam</artist_name>
+      <songID id="song7 song3"/>
+    </artist>
+  </artists>
+
+  <albums>
+    <album id="album4">
+      <album_name>M.S.Dhoni</album_name>
+      <songid id="song3 song2"/>
+      <album_year>1992</album_year>
+    </album>
+  </albums>
+
+  <playlists>
+    <playlist>
+      <playlist_name>playlist3</playlist_name>
+      <song id="song1 song3 song7"/>
+    </playlist>
+  </playlists>
+
+  
 </music_player>
