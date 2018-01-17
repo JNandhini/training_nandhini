@@ -13,7 +13,7 @@ int main()
 		cout << "\na.Insert songs\nb.Insert artists\nc.Insert albums\nd.Insert playlist\ne.Display the songs\nf.Display the artist\ng.Display albums\nh.Display playlists\ni.Exit";
 		cout << "\nEnter the choice";
 		cin >> choice;
-		string value;
+		
 		switch (choice)
 		{
 			if (choice == 'a' || choice == 'b'||choice=='c'||choice=='d'||choice=='e'||choice=='f'||choice=='g'||choice=='h'||choice=='i')
