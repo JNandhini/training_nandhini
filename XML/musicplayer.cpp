@@ -2,7 +2,10 @@
 #include "musicplayer.h"
 XercesDOMParser*   parser = NULL;
  ErrorHandler*      errorHandler = NULL;
- 
+ const int ABSOLUTE_PATH_FILENAME_PREFIX_SIZE = 0;
+
+ //constructor which initializes the parser
+
  musicplayer::musicplayer(const char* file) : document(NULL)
  {
 	   
@@ -11,21 +14,19 @@ XMLPlatformUtils::Initialize();
     parser->parse(file);
 		 document = parser->adoptDocument();
 	
-		/* XMLCh tempString[100];
-		 XMLString::transcode("LS", tempString, 99);
-		 DOMImplementation *impl = DOMImplementationRegistry::getDOMImplementation(tempString);
-		 DOMLSParser* parser = ((DOMImplementationLS*)impl)->createLSParser(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
-  		 document = parser->parseURI(file);
-			*/
-		 
+	
 	
 	 }
+ 
+ //destructor which releases the document 
 
  musicplayer::~musicplayer()
 	  {
 	      if (document) document->release();
 	  }
  
+
+ //this is used to get the element value
 
 	  string musicplayer::get_value(const char* parentTag, int parentIndex, const char* childTag, int childIndex)
 	  {
@@ -49,9 +50,10 @@ XMLPlatformUtils::Initialize();
 		}
 	return value;
 	  }
- 
 
 　
+	  //this is used to get the attribute values
+
 	  string musicplayer::get_attribute(const char* parentTag, int parentIndex, const char* childTag, int childIndex,
 	                                           const char* attributeTag)
 	  {
@@ -76,15 +78,17 @@ XMLPlatformUtils::Initialize();
 	  	return value;
 	  }
  
+	  //get the root element count
 
-	  int musicplayer::getRootElementCount(const char* rootElementTag)
+	  int musicplayer::get_root_count(const char* rootElementTag)
 	  {
 	  	DOMNodeList* list = document->getElementsByTagName(XMLString::transcode(rootElementTag));
 	  	return (int)list->getLength();
 	  }
  
+	  //it counts the nodes
 
-	  int musicplayer::getChildCount(const char* parentTag, int parentIndex, const char* childTag)
+	  int musicplayer::get_count(const char* parentTag, int parentIndex, const char* childTag)
 	  {
 	  	XMLCh* tag = XMLString::transcode(parentTag);
 	  	DOMNodeList* list = document->getElementsByTagName(tag);
@@ -94,6 +98,9 @@ XMLPlatformUtils::Initialize();
 	    return (int)childList->getLength();
 	  }
 	 
+
+	  //used to insert the songs in xml file
+
 	  void musicplayer::insert_songs()
 	  {
 		 
@@ -105,7 +112,7 @@ XMLPlatformUtils::Initialize();
 		  element->setAttribute(L"id", L"song7");
 		  DOMElement* SongNameElement = document->createElement(L"song_name");
 		  element->appendChild(SongNameElement);
-		  DOMText* SongText = document->createTextNode(L"song7");
+		  DOMText* SongText = document->createTextNode(L"Konjam un");
 		  SongNameElement->appendChild(SongText);
 		  DOMElement* Artist = document->createElement(L"artistid");
 		  element->appendChild(Artist);
@@ -113,9 +120,12 @@ XMLPlatformUtils::Initialize();
 		  DOMElement* Album = document->createElement(L"albumid");
 		  element->appendChild(Album);
 		  Album->setAttribute(L"id", L"album1");
-		  OutputXML(document, "./musicplayer.xml");
+		  reading_xmlfile(document, "./musicplayer.xml");
 		 
 	  }
+
+	  //used to insert the artist in xml file
+
 	  void musicplayer:: insert_artist()
 	  {
 		  DOMElement* Root = document->getDocumentElement();
@@ -126,14 +136,17 @@ XMLPlatformUtils::Initialize();
 		  newartist->setAttribute(L"id", L"artist5");
 		  DOMElement* ArtistNameElement = document->createElement(L"artist_name");
 		  newartist->appendChild(ArtistNameElement);
-		  DOMText* ArtistText = document->createTextNode(L"artist5");
+		  DOMText* ArtistText = document->createTextNode(L"Aslam");
 		  ArtistNameElement->appendChild(ArtistText);
-		  DOMElement* Songs = document->createElement(L"songId");
+		  DOMElement* Songs = document->createElement(L"songID");
 		  newartist->appendChild(Songs);
 		  Songs->setAttribute(L"id", L"song7 song3");
-		  OutputXML(document, "./musicplayer.xml");
+		  reading_xmlfile(document, "./musicplayer.xml");
 
 	  }
+
+	  //used to insert the album in xml file
+
 	  void musicplayer::insert_album()
 	  {  
 		  DOMElement* Root = document->getDocumentElement();
@@ -144,7 +157,7 @@ XMLPlatformUtils::Initialize();
 		  newalbum->setAttribute(L"id", L"album4");
 		  DOMElement* AlbumNameElement = document->createElement(L"album_name");
 		  newalbum->appendChild(AlbumNameElement);
-		  DOMText* AlbumText = document->createTextNode(L"album4");
+		  DOMText* AlbumText = document->createTextNode(L"M.S.Dhoni");
 		  AlbumNameElement->appendChild(AlbumText);
 		  DOMElement* AlbumSong = document->createElement(L"songid");
 		  newalbum->appendChild(AlbumSong);
@@ -153,8 +166,11 @@ XMLPlatformUtils::Initialize();
 		  newalbum->appendChild(AlbumYearElement);
 		  DOMNode* AlbumYear = document->createTextNode(L"1992");
 		  AlbumYearElement->appendChild(AlbumYear);
-		  OutputXML(document, "./musicplayer.xml");
+		  reading_xmlfile(document, "./musicplayer.xml");
 	  }
+
+	  //used to inserts playlist in xml file
+
 	  void musicplayer::insert_playlist()
 	  {
 		  DOMElement* Root = document->getDocumentElement();
@@ -169,11 +185,15 @@ XMLPlatformUtils::Initialize();
 		  DOMElement* PlaylistSong = document->createElement(L"song");
 		  PlaylistElement->appendChild(PlaylistSong);
 		  PlaylistSong->setAttribute(L"id", L"song1 song3 song7");
-		  OutputXML(document, "./musicplayer.xml");
-	  }
-	  const int ABSOLUTE_PATH_FILENAME_PREFIX_SIZE = 0;
 
-	  void musicplayer:: OutputXML(xercesc::DOMDocument* Document, std::string filePath)
+		  //calls the reading xml file to modify it by inserting
+
+		  reading_xmlfile(document, "./musicplayer.xml");
+	  }
+	  
+	  //this insert the elements 
+
+	  void musicplayer:: reading_xmlfile(xercesc::DOMDocument* Document, std::string filePath)
 	  {
 		  
 		  DOMImplementation *implementation = DOMImplementationRegistry::getDOMImplementation(L"LS");
@@ -194,123 +214,149 @@ XMLPlatformUtils::Initialize();
 		  delete formatTarget;
 		  output->release();
 	  }
+
+　
+	  //display the songs
+
 	  void musicplayer::display_songs()
 	  {
-		  string value;
-		  for (int count = 0; count < getChildCount("songs", 0, "song"); count++)
+		  string name;
+		  string id;
+		  string idrefs;
+		  string idref;
+		  for (int count = 0; count < get_count("songs", 0, "song"); count++)
 		  {
 			  cout << "\nThe songs are";
-			  value = get_attribute("songs", 0, "song", count, "id");
-			  cout << "\nSong id is " << value.c_str() << endl;
-			  value = get_value("song", count, "song_name", 0);
-			  cout << "Song name is " << value.c_str() << endl;
-			  value = get_attribute("songs", 0, "artistid", count, "id");
-			  cout << "Artists name " << value.c_str() << endl;
-			  value = get_attribute("songs", 0, "albumid", count, "id");
-			  cout << "album name " << value.c_str() << endl;
+			  id = get_attribute("songs", 0, "song", count, "id");
+			  cout << "\nSong id is " << id.c_str() << endl;
+			  name = get_value("song", count, "song_name", 0);
+			  cout << "Song name is " << name.c_str() << endl;
+			  idrefs = get_attribute("songs", 0, "artistid", count, "id");
+			  cout << "Artists name " << idrefs.c_str() << endl;
+			  idref = get_attribute("songs", 0, "albumid", count, "id");
+			  cout << "album name " << idref.c_str() << endl;
 
 		  }
 
-		  for (int count = 0; count < getChildCount("songs", 1, "song"); count++)
+　
+		  for (int count = 0; count < get_count("songs", 1, "song"); count++)
 		  {
 
 			  cout << "\nThe songs are";
-			  value = get_attribute("songs", 1, "song", count, "id");
-			  cout << "\nSong id is " << value.c_str() << endl;
-			  value = get_value("song", count, "song_name", 1);
-			  cout << "Song name is " << value.c_str() << endl;
-			  value = get_attribute("songs", 1, "artistid", count, "id");
-			  cout << "Artists name " << value.c_str() << endl;
-			  value = get_attribute("songs", 1, "albumid", count, "id");
-			  cout << "album name " << value.c_str() << endl;
+			  id = get_attribute("songs", 1, "song", count, "id");
+			  cout << "\nSong id is " << id.c_str() << endl;
+			  name = get_value("songs", 1, "song_name", 0);
+			  cout << "Song name is " << name.c_str() << endl;
+			  idrefs = get_attribute("songs", 1, "artistid", count, "id");
+			  cout << "Artists name " << idrefs.c_str() << endl;
+			  idref = get_attribute("songs", 1, "albumid", count, "id");
+			  cout << "album name " << idref.c_str() << endl;
 
 　
 		  }
+		 
 	  }
+
+	  //displays the artist
+
 	  void musicplayer::display_artist()
 	  {
-		  string value;
-		  for (int count = 0; count <getChildCount("artists", 0, "artist"); count++)
+		  string name;
+		  string id;
+		  for (int count = 0; count <get_count("artists", 0, "artist"); count++)
 		  {
 			  cout << "\nThe artists are";
-			  value = get_attribute("artists", 0, "artist", count, "id");
-			  cout << "\nArtist id is " << value.c_str() << endl;
-			  value = get_value("artist", count, "artist_name", 0);
-			  cout << "Artist name is " << value.c_str() << endl;
-			  value = get_attribute("artists", 0, "songID", count, "id");
-			  cout << "Songs are " << value.c_str() << endl;
+			  id= get_attribute("artists", 0, "artist", count, "id");
+			  cout << "\nArtist id is " << id.c_str() << endl;
+			  name = get_value("artist", count, "artist_name", 0);
+			  cout << "Artist name is " << name.c_str() << endl;
+			  id = get_attribute("artists", 0, "songID", count, "id");
+			  cout << "Songs are " << id.c_str() << endl;
 
 		  }
-		  for (int count = 0; count < getChildCount("artists", 1, "artist"); count++)
+		  for (int count = 0; count < get_count("artists", 1, "artist"); count++)
 		  {
 			  cout << "\nThe artists are";
-			  value = get_attribute("artists", 1, "artist", count, "id");
-			  cout << "\nArtist id is " << value.c_str() << endl;
-			  value = get_value("artist", count, "artist_name", 1);
-			  cout << "Artist name is " << value.c_str() << endl;
-			  value = get_attribute("artists", 1, "songID", count, "id");
-			  cout << "Songs are " << value.c_str() << endl;
+			  id = get_attribute("artists", 1, "artist", count, "id");
+			  cout << "\nArtist id is " << id.c_str() << endl;
+			  name = get_value("artists", 1, "artist_name", 0);
+			  cout << "Artist name is " << name.c_str() << endl;
+			  id = get_attribute("artists", 1, "songID", count, "id");
+			  cout << "Songs are " << id.c_str() << endl;
 		  }
 	  }
+
+　
+	  //displays the album
+
 	  void musicplayer::display_album()
 	  {
-		  string value;
-		  for (int count = 0; count < getChildCount("albums", 0, "album"); count++)
+		  string name;
+		  string id;
+		  string year;
+		  for (int count = 0; count < get_count("albums", 0, "album"); count++)
 		  {
 			  cout << "\nThe albums are";
-			  value = get_attribute("albums", 0, "album", count, "id");
-			  cout << "\nAlbum id " << value.c_str() << endl;
-			  value =get_value("album", count, "album_name", 0);
-			  cout << "Album name is " << value.c_str() << endl;
-			  value = get_attribute("albums", 0, "songid", count, "id");
-			  cout << "The songs are " << value.c_str() << endl;
-			  value = get_value("album", count, "album_year", 0);
-			  cout << "Album year " << value.c_str() << endl;
+			  id = get_attribute("albums", 0, "album", count, "id");
+			  cout << "\nAlbum id " << id.c_str() << endl;
+			  name = get_value("album", count, "album_name", 0);
+			  cout << "Album name is " << name.c_str() << endl;
+			  id = get_attribute("albums", 0, "songid", count, "id");
+			  cout << "The songs are " << id.c_str() << endl;
+			  year = get_value("album", count, "album_year", 0);
+			  cout << "Album year " << year.c_str() << endl;
 		  }
-		  for (int count = 0; count < getChildCount("albums", 1, "album"); count++)
+		  for (int count = 0; count < get_count("albums", 1, "album"); count++)
 		  {
 			  cout << "\nThe albums are";
-			  value = get_attribute("albums", 1, "album", count, "id");
-			  cout << "\nAlbum id " << value.c_str() << endl;
-			  value = get_value("album", count, "album_name", 1);
-			  cout << "Album name is " << value.c_str() << endl;
-
-			  value = get_attribute("albums", 1, "songid", count, "id");
-			  cout << "The songs are " << value.c_str() << endl;
-			  value = get_value("album", count, "album_year", 1);
-			  cout << "Album year " << value.c_str() << endl;
-		  }
-
-		  for (int count = 0; count < getChildCount("albums1", 0, "compilation_album"); count++)
-		  {
-
-			  value = get_attribute("albums", 0, "compilation_album", count, "id");
-			  cout << " \ncompilation album id " << value.c_str() << endl;
-			  value = get_value("complilation_album", count, "compilation_album_name", 0);
-			  cout << "Compilation album name " << value.c_str() << endl;
-
-			  value = get_attribute("albums1", 0, "songId", count, "id");
-			  cout << "Songs are\n " << value.c_str() << endl;
+			  id = get_attribute("albums", 1, "album", count, "id");
+			  cout << "\nAlbum id " << id.c_str() << endl;
+			  name = get_value("albums", 1, "album_name", 0);
+			  cout << "Album name is " << name.c_str() << endl;
+			  id = get_attribute("albums", 1, "songid", count, "id");
+			  cout << "The songs are " << id.c_str() << endl;
+			  year = get_value("albums", 1, "album_year", 0);
+			  cout << "Album year " << year.c_str() << endl;
 		  }
 
 	  }
+
+	  //display the compilation album
+
+	  void musicplayer::display_compilation_album()
+	  {
+		  string name;
+		  string id;
+		  int count = 0;
+		  id = get_attribute("albums", 1, "compilation_album", 1, "Id");
+		  cout << " \nCompilation album id " << id.c_str() << endl;
+		  name = get_value("albums", 0, "compilation_album_name", 0);
+		  cout << "Compilation album name is " << name.c_str() << endl;
+		  id = get_attribute("albums", 0, "songId", count, "id");
+		  cout << "Songs are\n " << id.c_str() << endl;
+	  }
+
+	  //displays the playlist 
+
 	  void musicplayer::display_playlist()
 	  {
-		  string value;
-		  for (int count = 0; count < getChildCount("playlists", 0, "playlist"); count++)
+		  string name;
+		  string id;
+		  int count = 0;
+		  for (int count = 0; count < get_count("playlists", 0, "playlist"); count++)
 		  {
 			  cout << "\nThe playlists are";
-			  value = get_value("playlist", count, "playlist_name", 0);
-			  cout << "\nPlaylist name " << value.c_str() << endl;
-			  value = get_attribute("playlists", 0, "song", count, "id");
-			  cout << "Songs in the playlist are " << value.c_str() << endl;
+			  name= get_value("playlist", count, "playlist_name", 0);
+			  cout << "\nPlaylist name " << name.c_str() << endl;
+			  id = get_attribute("playlists", 0, "song", count, "id");
+			  cout << "Songs in the playlist are " << id.c_str() << endl;
 		  }
-		  for (int count = 0; count < getChildCount("playlists", 1, "playlist"); count++)
+		  for (int count = 0; count < get_count("playlists", 1, "playlist"); count++)
 		  {
 			  cout << "\nThe playlists are";
-			  value = get_value("playlist", count, "playlist_name", 1);
-			  cout << "\nPlaylist name " << value.c_str() << endl;
-			  value = get_attribute("playlists", 1, "song", count, "id");
-			  cout << "Songs in the playlist are " << value.c_str() << endl;
+			  name = get_value("playlists", 1, "playlist_name", 0);
+			  cout << "\nPlaylist name " << name.c_str() << endl;
+			  id = get_attribute("playlists", 1, "song", count, "id");
+			  cout << "Songs in the playlist are " << id.c_str() << endl;
 		  }
 	  }
