@@ -6,15 +6,59 @@ int main()
 {
 	musicplayer * music = new musicplayer("./musicplayer.xml");
 	char choice;
-     music->insert_songs();
-	 music->insert_artist();
-	 music->insert_album();
-	 music->insert_playlist();
-	 music->display_songs();
-	 music->display_artist();
-	 music->display_album();
-	 music->display_compilation_album();
-	 music->display_playlist();
-	 system("pause");
 
+	while (1)
+	{
+
+		cout << "\na.Insert songs\nb.Insert artists\nc.Insert albums\nd.Insert playlist\ne.Display the songs\nf.Display the artist\ng.Display albums\nh.Display playlists\ni.Exit";
+		cout << "\nEnter the choice";
+		cin >> choice;
+		string value;
+		switch (choice)
+		{
+			if (choice == 'a' || choice == 'b'||choice=='c'||choice=='d'||choice=='e'||choice=='f'||choice=='g'||choice=='h'||choice=='i')
+			{
+		case'a':
+			music->insert_songs();
+		
+			break;
+		case 'b':
+			music->insert_artist();
+		
+			break;
+		case 'c':
+			music->insert_album();
+		
+
+			break;
+		case 'd':
+			music->insert_playlist();
+			
+			break;
+		case 'e':
+			music->display_songs();
+			break;
+		case'f':
+			music->display_artist();
+			break;
+		case 'g':
+			music->display_album();
+			music->display_compilation_album();
+			break;
+		case 'h':
+			music->display_playlist();
+			break;
+		
+		case 'i':
+			exit(0);
+						
+			}
+			else
+			{
+				cout << "Invalid choice";
+			}
+		}
+		
+	}
+	system("pause");
 }
