@@ -1,0 +1,164 @@
+#include "Database.h"
+#include "Database.h"
+#include <iostream>
+#include <windows.h>
+#include <sqlext.h>
+#include <sqltypes.h>
+#include <sql.h>
+
+　
+using namespace std;
+
+void Database::create()
+{
+
+#define SQL_RESULT_LEN 240
+#define SQL_RETURN_CODE_LEN 1000
+
+	
+	SQLHANDLE sqlConnHandle;
+	SQLHANDLE sqlStmtHandle;
+	SQLHANDLE sqlStmtHandle1;
+	SQLHANDLE sqlEnvHandle;
+	SQLWCHAR retconstring[SQL_RETURN_CODE_LEN]; 
+	SQLHSTMT hstmt = SQL_NULL_HSTMT;
+	SQLSMALLINT columns=0; 
+	RETCODE retcode;
+	sqlConnHandle = NULL;
+	sqlStmtHandle = NULL;
+	sqlStmtHandle1 = NULL;
+
+	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle))
+		goto COMPLETED;
+
+	if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0))
+		goto COMPLETED;
+
+	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle))
+		goto COMPLETED;
+
+	
+	cout << "Attempting connection to SQL Server...";
+	cout << "\n";
+
+	switch (SQLDriverConnect(sqlConnHandle,
+		NULL,
+		//(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=IN11W-TRAINEE5\\SQLEXPRESS, 49400;DATABASE=Mydata;UID=sa;PWD=abc123$%^;",
+		(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=IN11W-TRAINEE-1\\SQLEXPRESS, 49326;DATABASE=Musicplayer;Trusted=true;",
+		SQL_NTS,
+		retconstring,
+		1024,
+		NULL,
+		SQL_DRIVER_NOPROMPT)) {
+
+	case SQL_SUCCESS:
+		cout << "Successfully connected to SQL Server";
+		cout << "\n";
+		break;
+
+	case SQL_SUCCESS_WITH_INFO:
+		cout << "Successfully connected to SQL Server";
+		cout << "\n";
+		break;
+
+	case SQL_INVALID_HANDLE:
+		cout << "Could not connect to SQL Server";
+		cout << "\n";
+		goto COMPLETED;
+
+	case SQL_ERROR:
+		cout << "Could not connect to SQL Server";
+		cout << "\n";
+		goto COMPLETED;
+
+	default:
+		break;
+	}
+
+　
+	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle))
+		goto COMPLETED;
+
+	
+	cout << "\n";
+	cout << "Executing T-SQL query..."; //
+	cout << "\n";
+	
+	
+	/*
+	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle1, (SQLWCHAR*)L"SELECT  SongId  FROM Playlists WHERE Playlistname = 'Playlist2",  SQL_NTS))
+	{
+		cout << "Error querying SQL Server";
+		cout << "\n";
+		goto COMPLETED;
+	}
+	else 
+
+		SQLCHAR sqlVersion[SQL_RESULT_LEN];
+		SQLINTEGER ptrSqlVersion;
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+
+　
+			cout << "\nQuery Result:\n\n";
+			cout << "SongId=" << sqlVersion << endl;
+		}
+
+		while (SQLFetch(sqlStmtHandle1) == SQL_SUCCESS) {
+
+			SQLGetData(sqlStmtHandle1, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+
+		
+			cout << "\nQuery Result:\n\n";
+			cout << "SongId="<<sqlVersion << endl;
+		}
+
+	}*/
+	SQLCHAR sqlVersion[SQL_RESULT_LEN];
+	SQLWCHAR* Songs=NULL;
+	SQLWCHAR* SongId=NULL;
+	SQLINTEGER ptrSqlVersion;
+	SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"SELECT * FROM [dbo].[Songs] ", SQL_NTS);
+	SQLColumns(hstmt, NULL, 0, NULL, 0, Songs, SQL_NTS, SongId, 0);
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+			for (int i = 1; i < 4; i++){
+			SQLGetData(sqlStmtHandle, i, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "\nQuery Result:\n\n";
+			cout << "SongId=" << sqlVersion << endl;
+			
+		}
+
+	}
+	
+	
+COMPLETED:
+	SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
+	SQLDisconnect(sqlConnHandle);
+	SQLFreeHandle(SQL_HANDLE_DBC, sqlConnHandle);
+	SQLFreeHandle(SQL_HANDLE_ENV, sqlEnvHandle);
+	cout << "\nPress any key to exit...";
+	getchar();
+}/*
+ void Database::insert()
+{
+	string SongName;
+	string SongId;
+	string ArtistId;
+	string AlbumId;
+	cout << "Enter the Song id";
+	cin.ignore();
+	getline(cin, SongId);
+	cout << "Enter the Song name";
+	cin.ignore();
+	getline(cin , SongName);
+	cout << "Enter the artistid";
+	cin.ignore();
+	getline(cin, ArtistId);
+	cout << "Enter the Song name";
+	cin.ignore();
+	getline(cin, AlbumId);
+	INSERT INTO Songs(Songid, Songname, Artistid, Albumid) VALUES(SongId, SongName, ArtistId, AlbumId);
+}*/
