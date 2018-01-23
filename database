@@ -9,156 +9,346 @@
 　
 using namespace std;
 
-void Database::create()
+Database::Database()
 {
 
-#define SQL_RESULT_LEN 240
-#define SQL_RETURN_CODE_LEN 1000
-
-	
-	SQLHANDLE sqlConnHandle;
-	SQLHANDLE sqlStmtHandle;
-	SQLHANDLE sqlStmtHandle1;
-	SQLHANDLE sqlEnvHandle;
-	SQLWCHAR retconstring[SQL_RETURN_CODE_LEN]; 
-	SQLHSTMT hstmt = SQL_NULL_HSTMT;
-	SQLSMALLINT columns=0; 
-	RETCODE retcode;
 	sqlConnHandle = NULL;
 	sqlStmtHandle = NULL;
-	sqlStmtHandle1 = NULL;
-
-	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle))
-		goto COMPLETED;
-
-	if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0))
-		goto COMPLETED;
-
-	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle))
-		goto COMPLETED;
-
 	
+	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle);
+	SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
+	SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle);
+
 	cout << "Attempting connection to SQL Server...";
 	cout << "\n";
 
-	switch (SQLDriverConnect(sqlConnHandle,
+	if (SQLDriverConnect(sqlConnHandle,
 		NULL,
-		//(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=IN11W-TRAINEE5\\SQLEXPRESS, 49400;DATABASE=Mydata;UID=sa;PWD=abc123$%^;",
 		(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=IN11W-TRAINEE-1\\SQLEXPRESS, 49326;DATABASE=Musicplayer;Trusted=true;",
 		SQL_NTS,
 		retconstring,
 		1024,
 		NULL,
-		SQL_DRIVER_NOPROMPT)) {
-
-	case SQL_SUCCESS:
-		cout << "Successfully connected to SQL Server";
-		cout << "\n";
-		break;
-
-	case SQL_SUCCESS_WITH_INFO:
-		cout << "Successfully connected to SQL Server";
-		cout << "\n";
-		break;
-
-	case SQL_INVALID_HANDLE:
-		cout << "Could not connect to SQL Server";
-		cout << "\n";
-		goto COMPLETED;
-
-	case SQL_ERROR:
-		cout << "Could not connect to SQL Server";
-		cout << "\n";
-		goto COMPLETED;
-
-	default:
-		break;
-	}
-
-　
-	if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle))
-		goto COMPLETED;
-
-	
-	cout << "\n";
-	cout << "Executing T-SQL query..."; //
-	cout << "\n";
-	
-	
-	/*
-	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle1, (SQLWCHAR*)L"SELECT  SongId  FROM Playlists WHERE Playlistname = 'Playlist2",  SQL_NTS))
+		SQL_DRIVER_NOPROMPT))
 	{
-		cout << "Error querying SQL Server";
-		cout << "\n";
-		goto COMPLETED;
+		cout << "connected successfully";
 	}
-	else 
 
-		SQLCHAR sqlVersion[SQL_RESULT_LEN];
-		SQLINTEGER ptrSqlVersion;
+}
 
-		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
-
-			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
-
-　
-			cout << "\nQuery Result:\n\n";
-			cout << "SongId=" << sqlVersion << endl;
-		}
-
-		while (SQLFetch(sqlStmtHandle1) == SQL_SUCCESS) {
-
-			SQLGetData(sqlStmtHandle1, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
-
-		
-			cout << "\nQuery Result:\n\n";
-			cout << "SongId="<<sqlVersion << endl;
-		}
-
-	}*/
-	SQLCHAR sqlVersion[SQL_RESULT_LEN];
-	SQLWCHAR* Songs=NULL;
-	SQLWCHAR* SongId=NULL;
-	SQLINTEGER ptrSqlVersion;
-	SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"SELECT * FROM [dbo].[Songs] ", SQL_NTS);
-	SQLColumns(hstmt, NULL, 0, NULL, 0, Songs, SQL_NTS, SongId, 0);
-
-		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
-			for (int i = 1; i < 4; i++){
-			SQLGetData(sqlStmtHandle, i, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
-			cout << "\nQuery Result:\n\n";
-			cout << "SongId=" << sqlVersion << endl;
-			
-		}
-
-	}
-	
-	
-COMPLETED:
+Database::~Database()
+{
 	SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
 	SQLDisconnect(sqlConnHandle);
 	SQLFreeHandle(SQL_HANDLE_DBC, sqlConnHandle);
 	SQLFreeHandle(SQL_HANDLE_ENV, sqlEnvHandle);
 	cout << "\nPress any key to exit...";
 	getchar();
-}/*
- void Database::insert()
+}
+void Database::display_songs()
 {
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"select * from dbo.Song  inner join  dbo.Artist  on dbo.Song.ArtistId=dbo.Artist.ArtistId inner join dbo.Album on dbo.Song.AlbumId=dbo.Album.AlbumId ", SQL_NTS))
+	{
+		cout << "Error querying SQL Server";
+		cout << "\n";
+
+	}
+	else
+	{
+		SQLCHAR sqlVersion[SQL_RESULT_LEN];
+		SQLINTEGER ptrSqlVersion;
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "SongId=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "SongName=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 6, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+		    cout << "Artistiid=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 8, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "AlbumId=" << sqlVersion << endl;
+		}
+
+	}
+	
+}
+void Database::display_artists()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+	SQLCHAR sqlVersion[SQL_RESULT_LEN];
+	SQLINTEGER ptrSqlVersion;
+	SQLCHAR value[SQL_RESULT_LEN];
+	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"select * from dbo.Artist  inner join  dbo.Song  on dbo.Song.ArtistId=dbo.Artist.ArtistId inner join dbo.Artistsong on dbo.Song.Id=dbo.Artistsong.Songid ", SQL_NTS))
+	{
+		cout << "Error querying SQL Server";
+		cout << "\n";
+
+	}
+	else
+	{
+		
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+			
+			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "artistId=" << sqlVersion << endl;
+			char value=(char)sqlVersion;
+			
+			SQLGetData(sqlStmtHandle, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "ArtistName=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 4, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "Songname=" << sqlVersion << endl;
+			
+		}
+
+	}
+
+}
+void Database::display_albums()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"select * from dbo.Album  inner join  dbo.Song  on dbo.Song.AlbumId=dbo.Album.AlbumId inner join dbo.Albumsong on dbo.Song.Id=dbo.Albumsong.SongId ", SQL_NTS))
+	{
+		cout << "Error querying SQL Server";
+		cout << "\n";
+
+	}
+	else
+	{
+		SQLCHAR sqlVersion[SQL_RESULT_LEN];
+		SQLINTEGER ptrSqlVersion;
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "AlbumId=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "AlbumName=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 3, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "Albumyear=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 5, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "songname=" << sqlVersion << endl;
+		}
+
+	}
+
+}
+void Database::display_playlists()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)L"select  *from dbo.Playlist inner join  dbo.Playlistsong on dbo.Playlist.PlaylistId=dbo.Playlistsong.PlaylistId inner join dbo.Song on dbo.Playlistsong.SongId=dbo.Song.Id", SQL_NTS))
+	{
+		cout << "Error querying SQL Server";
+		cout << "\n";
+
+	}
+	else
+	{
+		SQLCHAR sqlVersion[SQL_RESULT_LEN];
+		SQLINTEGER ptrSqlVersion;
+
+		while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+			SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "SongId=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 2, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "SongName=" << sqlVersion << endl;
+			SQLGetData(sqlStmtHandle, 6, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+			cout << "Artistid=" << sqlVersion << endl;
+			
+		}
+
+	}
+
+}
+void Database::insert()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
 	string SongName;
 	string SongId;
-	string ArtistId;
-	string AlbumId;
+	string Artistid;
+	string AlbumId;	
 	cout << "Enter the Song id";
 	cin.ignore();
 	getline(cin, SongId);
-	cout << "Enter the Song name";
+	wcout << "Enter the Song name";
 	cin.ignore();
-	getline(cin , SongName);
-	cout << "Enter the artistid";
+	getline(cin, SongName);
+	cout << "Enter the artistid"; 
 	cin.ignore();
-	getline(cin, ArtistId);
-	cout << "Enter the Song name";
+	getline(cin, Artistid);
+	wcout << "Enter the artistid";
 	cin.ignore();
 	getline(cin, AlbumId);
-	INSERT INTO Songs(Songid, Songname, Artistid, Albumid) VALUES(SongId, SongName, ArtistId, AlbumId);
-}*/
+	SQLWCHAR *stmt = L"insert into Song(Id,Songname,ArtistId,AlbumId) values(?,?,?,?)";
+
+	retcode = SQLPrepare(sqlStmtHandle, (SQLWCHAR *)"insert into Song(Id,Songname,ArtistId,AlbumId) values(SongId , SongName , Artistid , AlbumId  )", SQL_NTS);
+	
+	retcode = SQLBindParameter(sqlStmtHandle, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_LONGVARCHAR, 50, 0, (SQLPOINTER)SongId.c_str(), SongId.length(), NULL);
+
+	retcode = SQLBindParameter(sqlStmtHandle, 2, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_LONGVARCHAR, 50, 0, (SQLPOINTER)SongName.c_str(), SongName.length(), NULL);
+
+	retcode = SQLBindParameter(sqlStmtHandle, 3, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_LONGVARCHAR, 50, 0, (SQLPOINTER)Artistid.c_str(), Artistid.length(), NULL);
+
+	retcode = SQLBindParameter(sqlStmtHandle, 4, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_LONGVARCHAR, 50, 0, (SQLPOINTER)AlbumId.c_str(), AlbumId.length(), NULL);
+
+　
+	retcode = SQLExecute(sqlStmtHandle);
+//	SQLWCHAR *stmt = L"insert into Song(Id,Songname,ArtistId,AlbumId) values(SongId,SongName,ArtistId,AlbumId)";
+	
+
+//retcode = SQLExecDirect(sqlStmtHandle,stmt , SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO) 
+	{
+		cout<<"Insert data OK!!. SQL was:\n\n\n\n";
+	}
+	
+
+	
+	else if (retcode!=SQL_SUCCESS)
+	{
+		cout << SQL_ERROR;
+	}
+}
+void Database::update_songs()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	SQLWCHAR *stmt = L"update Song set Songname='Vinayagane' where Id='song1'";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully inserted:\n\n\n\n";
+	}
+}
+void Database::update_artists()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	SQLWCHAR *stmt = L"update Artist set ArtistName='Harishraj' where ArtistId='artist3'";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully inserted:\n\n\n\n";
+	}
+}
+void Database::update_albums()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	SQLWCHAR *stmt = L"update Album set Albumname='album' where AlbumId='album1'";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully inserted:\n\n\n\n";
+	}
+}
+void Database::update_playlists()
+{
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+
+	SQLWCHAR *stmt = L"update Playlist set Playlistname='playlistname' where PlaylistId='playlist1'";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully inserted:\n\n\n\n";
+	}
+}
+void Database::delete_songs_data()
+{
+
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+	wstring Songname;
+	cout << "Enter the Songname";
+	wcin.ignore();
+	getline(wcin, Songname);
+	SQLWCHAR *stmt = L"select Songname from Song where exists(select Songname from Song where Songname='Vinayag')";
+
+	//SQLWCHAR *stmt = L"delete from Song where Songname=Songname";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+
+	while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
+
+　
+		SQLGetData(sqlStmtHandle, 1, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
+		cout << "artistId=" << sqlVersion << endl;
+	}
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully deleted:\n\n\n\n";
+	}
+}
+void Database::delete_artists_data()
+{
+
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+	wstring Songname;
+	cout << "Enter the Song id";
+	wcin.ignore();
+	getline(wcin, Songname);
+
+　
+	SQLWCHAR *stmt = L"delete from Song where Songname=Songname";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully deleted:\n\n\n\n";
+	}
+}
+void Database::delete_albums_data()
+{
+
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+	wstring album_name;
+	cout << "Enter the albumname";
+	wcin.ignore();
+	getline(wcin, album_name);
+
+　
+	SQLWCHAR *stmt = L"delete from Album where AlbumName=album_name";
+
+　
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully deleted:\n\n\n\n";
+	}
+}
+void Database::delete_playlists_data()
+{
+
+	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
+	wstring playlistname;
+	cout << "Enter the playlistname";
+	wcin.ignore();
+	getline(wcin, playlistname);
+
+　
+	SQLWCHAR *stmt = L"delete from Playlist where PlaylistName=playlistname";
+	
+
+	retcode = SQLExecDirect(sqlStmtHandle, stmt, SQL_NTS);
+	if (retcode == SQL_SUCCESS || retcode == SQL_SUCCESS_WITH_INFO)
+	{
+		cout << "Successfully deleted:\n\n\n\n";
+	}
+}
