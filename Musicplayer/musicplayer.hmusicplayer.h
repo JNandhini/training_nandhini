@@ -1,6 +1,8 @@
 #pragma once
 #include<iostream>
 #include<string>
+//#undef DOMDocument
+ 
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOM.hpp>
 #include<xercesc/dom/DOMNodeList.hpp>
@@ -15,7 +17,6 @@
 #include <xercesc/dom/DOMNodeList.hpp>
 #include <xercesc/framework/StdOutFormatTarget.hpp>
 #include <xercesc/framework/LocalFileFormatTarget.hpp>
-#include <xercesc/dom/DOMAttr.hpp>
 #include <xercesc/dom/impl/DOMDocumentFragmentImpl.hpp>
 using namespace std;
 using namespace xercesc;
@@ -24,14 +25,14 @@ using namespace xercesc;
 
 class musicplayer
 {
-	DOMDocument* document;
+	xercesc::DOMDocument* document;
 	DOMImplementation* implement;
 public:
 	string name;
 	string id;
 	string idrefs;
 	string idref;
-	int value;
+	
 public:
 
 	musicplayer(const char *file);
@@ -49,6 +50,8 @@ public:
 	void display_album();
 	void display_compilation_album();
 	void display_playlist();
+	void search_songs();
+	void search_artists();
 	void reading_xmlfile(xercesc::DOMDocument* Document, std::string filePath);
 	
 private:
