@@ -1,0 +1,354 @@
+
+
+System Design
+
+ 
+
+Documentation Standards:
+
+ 
+
+1. The software HANGMAN version 1.0
+contains standard module headers and the comment statements for the headers are
+given as per required. The headers for socket communication and some external
+library include comment statements. The ratio of the comment statements for the
+header is three headers for one line of commentary. The difficult area like
+server side connections and client side connections are given comment statements
+literally line by line. The less difficult areas like drawing some images like
+circle, creating windows and querying database are commented on the ratio of fives
+lines of code to one line comment statement.
+
+ 
+
+ 
+
+Naming conventions:
+
+ 
+
+1.
+The naming conventions used in the system
+is camel case and underscores are used to separate two or more words.
+
+ 
+
+
+
+
+ 
+  
+  File types
+   
+  
+  
+  File Extensions
+   
+  
+ 
+ 
+  
+  Header file
+  
+  
+  .h
+   
+  
+ 
+ 
+  
+  Class file
+  
+  
+  .cpp
+   
+  
+ 
+ 
+  
+  Database file
+   
+  
+  
+  .sql
+  
+ 
+
+
+
+
+ 
+
+ 
+
+2. The naming conventions used for files, programs,
+modules are camel case. The naming conventions used for variables are camel case.
+The functions names are given using small letters with underscore in between two
+words. In database the naming conventions used for 
+
+Database name and table names are camel
+case.  
+
+ 
+
+Programming Standards:
+
+ 
+
+1. The languages used in the system are c++ and sql.
+The sql means structured query language. It is an efficient language which is
+used to communicate with the database to store and retrieve details from the
+database. It provides an easy way to manipulate all the records in the
+database. C++ is a portable and efficient language which is an object oriented programming
+language. In this system c++ is used for coding socket communication, client
+side user interface, and every part of coding.
+
+ 
+
+2.
+The language used for database querying
+is sql and other coding in c++. The sql language is not case sensitive and the
+query is like.
+
+ Example:
+To insert new row
+
+ 
+
+ insert
+into tablename(column name1,column name2) values('value1','value2');
+
+ 
+
+c++ language standards used in the
+system are
+
+ 
+
+For classes:
+
+ 
+
+class ClassName
+
+{
+
+coding;
+
+};
+
+ 
+
+ 
+
+  For
+functions:
+
+ 
+
+returntype  function_name()
+
+{
+
+coding;
+
+}
+
+ 
+
+For loops and statements:
+
+ 
+
+for(condition;)
+
+{
+
+coding;
+
+}
+
+ 
+
+if(condition)
+
+{
+
+statements;
+
+}
+
+ 
+
+For variables:
+
+ 
+
+Returntype VariableName1;
+
+Returntype VariableName2;
+
+ 
+
+ 
+
+3. Ths system includes the programming
+standards in consistent and uniform programming style.
+
+ 
+
+            a.Modularity
+defines the term that the design is split into several modules that can be
+independently created. In the system modules created are accessed through the
+interfaces.
+
+            b.
+the programming standards for headers and commenting are
+
+         
+
+
+              For headers
+
+ 
+
+            #include <library.h>
+
+            #include
+"header.h"
+
+            #include
+<library>
+
+   
+
+
+            For
+commenting
+
+ 
+
+            //The
+comments are
+
+ 
+
+            c.indenting
+and layout standards are
+
+             
+
+Indenting
+
+ 
+
+                             for
+class
+
+                                     no space from margin
+
+                                    
+
+     for
+functions:
+
+single tab
+
+                                    
+
+                            
+
+
+     for variables:
+
+                                    single
+ tab
+
+                        
+
+                        for
+looping and statements:
+
+                                    double
+tab
+
+ 
+
+            d.
+The library routines used are
+
+            
+
+                        for graphics programming using  c++
+
+                        
+
+bgi
+
+            
+
+                        for socket communication using c++
+
+ 
+
+libws2_32.a
+
+                                                          
+
+            e. language constructs to be used
+are
+
+                        for programmming in c++
+
+                              class ClassName
+
+                                   {
+
+                                    Variable declaration;
+
+                                    Function definition;
+
+                                    };
+
+              f. Language constructs to avoid
+
+                          for c++
+
+                                class
+classname{
+
+                                    Variable declaration;
+
+                                    Function definition; }; 
+
+    
+
+SOFTWARE
+ DEVELOPEMENT TOOLS
+
+          
+
+          1. The
+development tools used for creating an application is visual studio 2013.The
+tool used for creating user interface, establishing server connection between
+client and server is visual studio 2013.
+
+           2. The lists includes the tools used for
+application development tool, tool for documentation.
+
+                     a. visual studio 2013- for
+developing application
+
+                      b. Microsoft word 2010-
+used for documentation
+
+4.6
+OUTSTANDING ISSUES
+
+ 
+
+Pros:
+
+            
+
+                                                          
+
