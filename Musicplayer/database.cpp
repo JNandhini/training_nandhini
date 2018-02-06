@@ -9,6 +9,9 @@
 　
 using namespace std;
 
+// Constructor which allocates handle
+
+
 Database::Database()
 {
 
@@ -45,6 +48,9 @@ Database::~Database()
 	cout << "\nPress any key to exit...";
 	getchar();
 }
+
+//Display the details of the songs
+
 void Database::display_songs()
 {
 	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
@@ -75,6 +81,9 @@ void Database::display_songs()
 	}
 	
 }
+
+//Displays the details of the artists
+
 void Database::display_artists()
 {
 	SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle);
@@ -119,6 +128,9 @@ void Database::display_artists()
 	}
 
 }
+
+//Display the details of the albums
+
 void Database::display_albums()
 {
 	int AlbumYear = 0;
@@ -165,6 +177,9 @@ void Database::display_albums()
 	}
 
 }
+
+//Displays the details of the playlists
+
 void Database::display_playlists()
 {
 	char value[90];
@@ -206,6 +221,9 @@ void Database::display_playlists()
 	}
 
 }
+
+//Insert the songs
+
 void Database::insert_songs()
 {
 	
@@ -249,6 +267,9 @@ void Database::insert_songs()
 	}
 
 }
+
+//Insert the playlist
+
 void Database::insert_playlists()
 {
 	char PlaylistName[90];
@@ -283,6 +304,9 @@ void Database::insert_playlists()
 		cout << "Successfully Inserted";
 	}
 }
+
+/Searchrs for songs
+
 void Database::search_songs()
 {
 	char Songname[90];
@@ -316,6 +340,8 @@ void Database::search_songs()
 		}
 
 	}
+
+//Searches the artists
 
 void Database::search_artists()
 {
@@ -359,6 +385,8 @@ void Database::search_artists()
 	}
 
 	}
+
+//Searches the albums
 
 void Database::search_albums()
 {
@@ -413,6 +441,8 @@ void Database::search_albums()
 	}
 }
 
+//Searches the playlists
+
 void Database::search_playlists()
 {
 	int AlbumYear = 0;
@@ -456,6 +486,8 @@ void Database::search_playlists()
 	}
 }
 
+//Updates the aomga
+
 void Database::update_songs()
 { 
 	char name[90];
@@ -479,6 +511,9 @@ void Database::update_songs()
 		cout << "Successfully updated\n";
 	}
 }
+
+//updates the artists
+
 void Database::update_artists()
 {
 	char name[90];
@@ -502,6 +537,9 @@ void Database::update_artists()
 		cout << "Successfully updated";
 	}
 }
+
+//Updates the albums
+
 void Database::update_albums()
 {
 	char name[90];
@@ -525,6 +563,9 @@ void Database::update_albums()
 		cout << "Successfully updated";
 	}
 	}
+
+//Updates the playlists
+
 void Database::update_playlists()
 {
 	char name[90];
@@ -552,6 +593,8 @@ void Database::update_playlists()
 	SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
 
 	}
+//Deletes the detaila of the songs
+	
 void Database::delete_data()
 {
 
