@@ -5,8 +5,10 @@
 #include <sql.h>
 #include <sqlext.h>
 #include <sqltypes.h>
-
 using namespace std;
+
+//Stores and retrieve the details of songs 
+
 class Database
 {
 public:
@@ -15,9 +17,8 @@ public:
 
 	SQLHANDLE sqlConnHandle;
 	SQLHANDLE sqlStmtHandle;
-	//SQLHANDLE sqlStmtHandle1;
 	SQLHANDLE sqlEnvHandle;
-	//SQLHANDLE DBCHandle;
+	
 	SQLWCHAR retconstring[SQL_RETURN_CODE_LEN];
 	SQLHSTMT hstmt = SQL_NULL_HSTMT;
 	RETCODE retcode;
