@@ -31,9 +31,7 @@ int main()
     std::cout<<"Size of DerivedClass "<<derivedSize << "\n";
     return 0;
 }
-
 Answer:
-
 Size of BaseClass 8 bytes
 Size of DerivedClass 12 bytes
 
